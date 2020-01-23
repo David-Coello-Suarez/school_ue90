@@ -8,5 +8,5 @@
     </head>
     <body>
         <div class='container'>
-            <? $arr = array(0,9,8,7,6,5,4,3,2,1);  ?>
-            <? html::select("select-op",$arr,"8") ?>
+            <? $arr = array("a","b","c","d");  ?>
+            <? html::table("IDList",$arr) ?>
