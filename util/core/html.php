@@ -4,19 +4,19 @@
         /* funcion para el tutilo de la pagina*/
         public static function title($x,$y=NULL)
         {
-            return "<title>$x".( $y==NULL ? '': " | $y" )."</title>";
+            return print_r("<title>$x".( $y==NULL ? '': " | $y" )."</title>");
         }
 
         /* funcion para agregar los links css*/
-        public static function css($css)
+        public static function css($css,$webversion=NULL)
         {
-            return print_r("<link type='text/css' rel='stylesheet' href='".$css."' />");
+            return print_r("<link type='text/css' rel='stylesheet' href='".$css.($webversion!=NULL?"?v=$webversion":"")."' />");
         }
         
         /* funcion para agregar los scripts js*/
-        public static function js($js,$webversion=NULL)
+        public static function js($js,$type=NULL,$webversion=NULL)
         {
-            return print_r("<script type='module' language='javascript' src='".$js.( $webversion != NULL ? "?v=$webversion":"" )."'></script>");
+            return print_r("<script type='".($type!=NULL?"text/javscript":"module")."' language='javascript' src='".$js.( $webversion != NULL ? "?v=$webversion":"" )."'></script>");
         }
         
         /* funcion para agregar los scripts js*/
