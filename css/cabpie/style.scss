@@ -1,7 +1,8 @@
 $primario: #3c8dbc;
-$secondario: #3f6b85;
+$secondario: #367fa9;
 $ternario:#222d32;
 $text-hover:rgba(218, 195, 195, 0.829);
+$alto:55px;
 
 @keyframes swing {
     0% {
@@ -33,7 +34,7 @@ $text-hover:rgba(218, 195, 195, 0.829);
     }
   }
 
-a:link, a:hover
+* a:link, a:hover
 {
     text-decoration: none;
 }
@@ -42,96 +43,120 @@ body .container-fluid
     display: flex;    
 }
 body .container-fluid .sidebar-lateral,
-body .container-fluid .sidebar-lateral .sidebar-header>a,
-body .container-fluid .sidebar-lateral .sidebar-menu .menu>li>a,
-body .container-fluid .sidebar-lateral .sidebar-menu .menu li a>i,
-body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul li a::before
+body .container-fluid .sidebar-lateral .sidebar-header>a .logo-lg.active,
+body .container-fluid .sidebar-lateral .sidebar-header>a .logo-mini.active,
+body .container-fluid .sidebar-lateral .sidebar-header>a .logo-lg,
+body .container-fluid .sidebar-lateral .sidebar-header>a .logo-mini,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li>a span,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li>a i,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview>a::after
 {
-    transition: all .3s ease;
+  transition: all .3s ease;
 }
 body .container-fluid .sidebar-lateral
 {
-    background: $ternario;
-    width: 250px;
-    height: 100vh;
-    position: relative;
+  background: $ternario;
+}
+body .container-fluid .sidebar-lateral
+{
+  width: 250px;
+  z-index: 810;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
 }
 body .container-fluid .sidebar-lateral .sidebar-header
 {
-    width: 100%;
-    padding: 15px 0;
-    font-size: 20px;
-    color: white;
-    text-align: center;
-    letter-spacing: 3px;
-    background: $secondario;
-    line-height: 20px;
+  border-bottom: 1px solid $secondario;
+  background: $secondario;
+  height: $alto;
 }
-body .container-fluid .sidebar-lateral .sidebar-header>a
+$margen:6px;
+body .container-fluid .sidebar-lateral.active
 {
-    color: #bbb;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 600;
-
-}
-body .container-fluid .sidebar-lateral .sidebar-header>a .logo-lg
-{
-    display: block;
-}
-body .container-fluid .sidebar-lateral .sidebar-header>a .logo-mini
-{
-    display: none;
+  width: 55px;
+  overflow: hidden;
 }
 body .container-fluid .sidebar-lateral .sidebar-header>a:hover
 {
-    text-shadow: 0px 0px 13px #fff;
-    color: white;
+  text-shadow: 3px 3px 5px white;
+}
+body .container-fluid .sidebar-lateral .sidebar-header>a
+{
+  display: block;
+  padding: 15px 0;
+  text-align: center;  
+  letter-spacing: 3px;
+}
+body .container-fluid .sidebar-lateral .sidebar-header>a span
+{
+  color: $text-hover;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body .container-fluid .sidebar-lateral .sidebar-header>a .logo-lg.active
+{
+  display: none;
+}
+body .container-fluid .sidebar-lateral .sidebar-header>a .logo-mini.active
+{
+  display: block;
+  line-height: 20px;
+  margin-top: -5px;
+}
+body .container-fluid .sidebar-lateral .sidebar-header>a .logo-mini
+{
+  display: none;
 }
 body .container-fluid .sidebar-lateral .sidebar-menu
 {
-    padding: 5px 0px;
+  padding: 10px 8px;
 }
 body .container-fluid .sidebar-lateral .sidebar-menu .menu
 {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu>li
+{
+  position: relative;
+  cursor: pointer;
 }
 body .container-fluid .sidebar-lateral .sidebar-menu .menu>li>a
 {
-    display: block;
-    padding: 5px 10px;
-    border-left: 3px solid transparent;
-    border-top: 1px;
-    border-bottom: 1px;
-    line-height: 15px;
+  position: relative;
 }
-body .container-fluid .sidebar-lateral .sidebar-menu .menu>li:hover>a>span,
-body .container-fluid .sidebar-lateral .sidebar-menu .menu>li.active>a>span,
-body .container-fluid .sidebar-lateral .sidebar-menu .menu>li:hover>a,
-body .container-fluid .sidebar-lateral .sidebar-menu .menu>li:hover>a
+body .container-fluid .sidebar-lateral .sidebar-menu .menu>li>a
 {
-    border-left-color: $primario;
-    color: #fff;
+  display: inline-flex;
+  color: $text-hover;
+  padding: 5px ;
+  width: 100%;
 }
-body .container-fluid .sidebar-lateral .sidebar-menu .menu li a>span
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li>a>span
 {
-    color: #b8c7ce;
-    font-size: 15px;
-    font-family: serif;
-    letter-spacing: 2px;
+  letter-spacing: 1px;
+  margin-left: 11px;
+  vertical-align: middle;
 }
-body .container-fluid .sidebar-lateral .sidebar-menu .menu li a>i
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li>a>i
 {
-    color: #b8c7ce;
-    border-radius: 5px;
-    background: #555;
-    padding: 5px;
-    margin: auto;
-    margin-right: 10px;
+  background: #444;
+  padding: 6px;
+  border-radius: .2rem;
+  width: 30px;
 }
-body .container-fluid .sidebar-lateral .sidebar-menu .menu li:hover>a>i::before,
-body .container-fluid .sidebar-lateral .sidebar-menu .menu li.active>a>i::before
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li:hover>a span,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li.active>a span,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview:hover>a::after
+{
+  color: white;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li:hover>a i,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li.active>a i,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview .collapse ul li:hover>a::before,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview .collapse ul li.active>a::before
 {
   color: rgba(127, 213, 245, 0.993);
   text-shadow: 0px 0px 10px rgba(127, 213, 245, 0.993);
@@ -141,41 +166,123 @@ body .container-fluid .sidebar-lateral .sidebar-menu .menu li.active>a>i::before
 body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview>a::after
 {
   content: "\f103";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 700;
-  color: #b8c7ce;
-  line-height: 30px;
   position: absolute;
-  left: 90%;
-  top: 96px;
-  transform: rotate(0deg);
+  top: 5px;
+  left: 180px;
+  vertical-align: middle;
+  font-weight: 600;
+  font-family: "Font Awesome 5 Free";
+  overflow: hidden;
 }
-body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview>a::after.active
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul
 {
-  transform: rotate(90deg);
-}
-body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul{
   list-style-type: none;
-  list-style-position: outside;
-  padding: 6px 0;
+  padding: 0;
+  margin: 0;
 }
 body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul li
 {
   padding-left: 40px;
+  font-size: 14px;
 }
-body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul li a::before
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul li>a
 {
-  
+  color: $text-hover;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul li>a::before
+{
   content: "\f111";
   font-family: "Font Awesome 5 Free";
-  font-size: 9px;
-  vertical-align: middle;
-  margin-right: 10px;
-  color: #b8c7ce;
+  font-weight: 300;
+  font-size: 8px;
+  margin-right: -9px;
 }
-body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul li a:hover::before
+body .container-fluid .sidebar-content
 {
-  
-  color: rgba(127, 213, 245, 0.993);
-  text-shadow: 0px 0px 10px rgba(127, 213, 245, 0.993);
+  width: 100%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// body .container-fluid .sidebar-content
+// {
+//   width: 100%;
+// }
+// body .container-fluid .sidebar-content>nav
+// {
+//   height: $alto;
+//   background: $primario;
+// }
+// body .container-fluid .sidebar-content>nav .bn
+// {
+//   color: white;
+//   background: $primario;
+//   position: relative;
+//   top: -8px;
+// }
+// body .container-fluid .sidebar-content>nav .bn:hover
+// {
+//   background: $secondario;
+// }
+// body .container-fluid .sidebar-content>nav .collapse,
+// body .container-fluid .sidebar-content>nav .collapsing
+// {
+//   position: absolute;
+//   background: white;
+//   top: 45px;
+//   left: auto;
+//   border-radius: .2rem;
+//   width: 130px;
+//   right: 0;
+// }
+// body .container-fluid .sidebar-content>nav .collapse ul,
+// body .container-fluid .sidebar-content>nav .collapsing ul
+// {
+//   list-style-type: none;
+//   margin: 0;
+//   padding: 0;
+// }
+// body .container-fluid .sidebar-content>nav .collapse ul li,
+// body .container-fluid .sidebar-content>nav .collapsing ul li
+// {
+//   margin: 8px auto ;
+//   display: block;
+//   text-align: center;
+// }
+// body .container-fluid .sidebar-content>nav .collapse ul li a,
+// body .container-fluid .sidebar-content>nav .collapsing ul li a
+// {
+//   display: inline-flex;
+//   vertical-align: middle;
+//   line-height: 17px;
+//   padding: 3px 10px;
+//   color: black;
+// }
+// body .container-fluid .sidebar-content>nav .collapse ul li a>i,
+// body .container-fluid .sidebar-content>nav .collapsing ul li a>i
+// {
+//   margin-right: 8px;
+// }
+// body .container-fluid .sidebar-content>nav .collapse ul li:hover,
+// body .container-fluid .sidebar-content>nav .collapsing ul li:hover
+// {
+//   background: rgba(156, 156, 156, 0.612);
+// }
