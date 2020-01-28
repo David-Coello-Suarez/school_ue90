@@ -71,10 +71,9 @@ body .container-fluid .sidebar-lateral .sidebar-header
   background: $secondario;
   height: $alto;
 }
-$margen:6px;
 body .container-fluid .sidebar-lateral.active
 {
-  width: 55px;
+  width: 62px;
   overflow: hidden;
 }
 body .container-fluid .sidebar-lateral .sidebar-header>a:hover
@@ -110,7 +109,7 @@ body .container-fluid .sidebar-lateral .sidebar-header>a .logo-mini
 }
 body .container-fluid .sidebar-lateral .sidebar-menu
 {
-  padding: 10px 8px;
+  padding: 10px 9px;
 }
 body .container-fluid .sidebar-lateral .sidebar-menu .menu
 {
@@ -137,7 +136,7 @@ body .container-fluid .sidebar-lateral .sidebar-menu .menu>li>a
 body .container-fluid .sidebar-lateral .sidebar-menu .menu li>a>span
 {
   letter-spacing: 1px;
-  margin-left: 11px;
+  margin-left: 14px;
   vertical-align: middle;
 }
 body .container-fluid .sidebar-lateral .sidebar-menu .menu li>a>i
@@ -201,88 +200,80 @@ body .container-fluid .sidebar-content
 {
   width: 100%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// body .container-fluid .sidebar-content
-// {
-//   width: 100%;
-// }
-// body .container-fluid .sidebar-content>nav
-// {
-//   height: $alto;
-//   background: $primario;
-// }
-// body .container-fluid .sidebar-content>nav .bn
-// {
-//   color: white;
-//   background: $primario;
-//   position: relative;
-//   top: -8px;
-// }
-// body .container-fluid .sidebar-content>nav .bn:hover
-// {
-//   background: $secondario;
-// }
-// body .container-fluid .sidebar-content>nav .collapse,
-// body .container-fluid .sidebar-content>nav .collapsing
-// {
-//   position: absolute;
-//   background: white;
-//   top: 45px;
-//   left: auto;
-//   border-radius: .2rem;
-//   width: 130px;
-//   right: 0;
-// }
-// body .container-fluid .sidebar-content>nav .collapse ul,
-// body .container-fluid .sidebar-content>nav .collapsing ul
-// {
-//   list-style-type: none;
-//   margin: 0;
-//   padding: 0;
-// }
-// body .container-fluid .sidebar-content>nav .collapse ul li,
-// body .container-fluid .sidebar-content>nav .collapsing ul li
-// {
-//   margin: 8px auto ;
-//   display: block;
-//   text-align: center;
-// }
-// body .container-fluid .sidebar-content>nav .collapse ul li a,
-// body .container-fluid .sidebar-content>nav .collapsing ul li a
-// {
-//   display: inline-flex;
-//   vertical-align: middle;
-//   line-height: 17px;
-//   padding: 3px 10px;
-//   color: black;
-// }
-// body .container-fluid .sidebar-content>nav .collapse ul li a>i,
-// body .container-fluid .sidebar-content>nav .collapsing ul li a>i
-// {
-//   margin-right: 8px;
-// }
-// body .container-fluid .sidebar-content>nav .collapse ul li:hover,
-// body .container-fluid .sidebar-content>nav .collapsing ul li:hover
-// {
-//   background: rgba(156, 156, 156, 0.612);
-// }
+body .container-fluid .sidebar-content>nav
+{
+  background: $primario;
+  height: $alto;
+}
+body .container-fluid .sidebar-content>nav .bn::before
+{
+  content: "\f0c9";
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 700;
+  color: white;
+}
+body .container-fluid .sidebar-content>nav .bn
+{
+  float: left;
+  background-color: transparent;
+  padding: 10px;
+  font-family: 'Font Awesome 5 Free';
+} 
+body .container-fluid .sidebar-content>nav ul .btn-group
+{
+  float: right;
+  margin-top: -3px;
+}
+body .container-fluid .sidebar-content>nav ul .btn-group .bt:hover
+{
+  background: $secondario;
+}
+body .container-fluid .sidebar-content>nav ul .btn-group .bt
+{
+  background: $primario;
+  border-color: $secondario;
+}
+body .container-fluid .sidebar-content>nav ul .btn-group .sub
+{
+  position: absolute;
+  top: 43px;
+  right: 0;
+  border: 1px solid black;
+  border-radius: .2rem;
+  width: 150px;
+  padding: 0px 0;
+  background: white;
+}
+body .container-fluid .sidebar-content>nav ul .btn-group .sub ul
+{
+  list-style-type: none;
+  padding: 0;
+}
+body .container-fluid .sidebar-content>nav ul .btn-group .sub ul li
+{
+  display: block;
+  margin: 7px 0;
+  text-align: center;
+}
+body .container-fluid .sidebar-content>nav ul .btn-group .sub ul li>a
+{
+  color: black;
+  text-align: center;
+}
+body .container-fluid .sidebar-content>nav ul .btn-group .sub ul li>a span
+{
+  text-align: center;
+}
+body .container-fluid .sidebar-content>nav ul .btn-group .sub ul li:hover
+{
+  background: #ccc;
+  z-index: 10000;
+}
+body .container-fluid .sidebar-content footer
+{
+  padding: 15px;
+  color: #444;
+  background: #fff;
+  border-top: 1px solid #d2d6de;
+  font-size: 12px;
+}

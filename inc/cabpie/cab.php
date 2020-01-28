@@ -71,41 +71,43 @@
             </div>
             <div class="sidebar-content">
                 <nav class="navbar">
-                    <button type="button" class="navbar-toggle bn btn btn-sm" data-toggle="collapse">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                    <ul class="float-right">
-                        <li class="btn-group">
-                            <a href="#" class="btn btn-primary">
-                                <i class="fa fa-user"></i>
-                                <span>
+                    <a href="#" class="bn sidebar-toggle" data-toggle="offcanvas" role="button"></a>
+                    <div class="exit">
+                        <ul class="nav navbar-nav">
+                            <li class="btn-group ">
+                                <a href="#" class="btn btn-primary bt">
+                                    <i class="fa fa-user mr-2"></i>
                                     Administrador
-                                </span>
-                            </a>
-                            <a href="#opc" class="btn btn-primary" data-toggle="collapse" aria-expanded="false">
-                                <i class="fa fa-angle-double-down"></i>
-                            </a>
-                            <div class="collapse" id="opc">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user"></i>
-                                            <span>
-                                                Perfil
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-sign-in-alt"></i>
-                                            <span>
-                                                Salir
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
+                                </a>
+                                <a href="#opc1" class="btn btn-primary bt" data-toggle="collapse" aria-expanded="false">
+                                    <i class="fa fa-angle-double-down"></i>
+                                </a>
+                                <div class="collapse sub" id="opc1">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-user mr-1"></i>
+                                                <span>Perfil</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-sign-in-alt"></i>
+                                                <span>
+                                                    Salir
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
-            </div>
+                <section class="date">
+                    <?
+                        $dias = array('Lunes','Martes','Miercoles','Jueves','Sábado','Domingo');
+                        $mes=array('Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Agosto','Octubre','Noviembre','Diciembre');
+                        echo $day=$dias[date('L')].' '.date('d').' de '.$mes[date('n')].', '.date('Y');
+                    ?>
+                </section>
