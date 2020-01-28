@@ -22,7 +22,7 @@
         /* funcion para agregar los scripts js*/
         public static function input($type="text",$id=NULL,$value=NULL,$clases=NULL)
         {
-            return "<input type='".$type."' name='".($id!=NULL?"$id":"")."' id='".($id!=NULL?"$id":"")."' class='form-control ".($clases!=NULL?"$clases":"")."' value='".($value!=NULL?"$value":"")."' />";
+            return print_r("<input type='".$type."' name='".($id!=NULL?"$id":"")."' id='".($id!=NULL?"$id":"")."' class='form-control ".($clases!=NULL?"$clases":"")."' value='".($value!=NULL?"$value":"")."' />");
         }
 
         public static function select($id=NULL,$option=array(),$selected=NULL,$class=NULL)

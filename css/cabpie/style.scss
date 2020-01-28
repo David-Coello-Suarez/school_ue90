@@ -1,0 +1,181 @@
+$primario: #3c8dbc;
+$secondario: #3f6b85;
+$ternario:#222d32;
+$text-hover:rgba(218, 195, 195, 0.829);
+
+@keyframes swing {
+    0% {
+      transform: rotate(0deg);
+    }
+    10% {
+      transform: rotate(10deg);
+    }
+    30% {
+      transform: rotate(0deg);
+    }
+    40% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(0deg);
+    }
+    60% {
+      transform: rotate(5deg);
+    }
+    70% {
+      transform: rotate(0deg);
+    }
+    80% {
+      transform: rotate(-5deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+a:link, a:hover
+{
+    text-decoration: none;
+}
+body .container-fluid
+{
+    display: flex;    
+}
+body .container-fluid .sidebar-lateral,
+body .container-fluid .sidebar-lateral .sidebar-header>a,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu>li>a,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li a>i,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul li a::before
+{
+    transition: all .3s ease;
+}
+body .container-fluid .sidebar-lateral
+{
+    background: $ternario;
+    width: 250px;
+    height: 100vh;
+    position: relative;
+}
+body .container-fluid .sidebar-lateral .sidebar-header
+{
+    width: 100%;
+    padding: 15px 0;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    letter-spacing: 3px;
+    background: $secondario;
+    line-height: 20px;
+}
+body .container-fluid .sidebar-lateral .sidebar-header>a
+{
+    color: #bbb;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+
+}
+body .container-fluid .sidebar-lateral .sidebar-header>a .logo-lg
+{
+    display: block;
+}
+body .container-fluid .sidebar-lateral .sidebar-header>a .logo-mini
+{
+    display: none;
+}
+body .container-fluid .sidebar-lateral .sidebar-header>a:hover
+{
+    text-shadow: 0px 0px 13px #fff;
+    color: white;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu
+{
+    padding: 5px 0px;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu
+{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu>li>a
+{
+    display: block;
+    padding: 5px 10px;
+    border-left: 3px solid transparent;
+    border-top: 1px;
+    border-bottom: 1px;
+    line-height: 15px;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu>li:hover>a>span,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu>li.active>a>span,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu>li:hover>a,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu>li:hover>a
+{
+    border-left-color: $primario;
+    color: #fff;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li a>span
+{
+    color: #b8c7ce;
+    font-size: 15px;
+    font-family: serif;
+    letter-spacing: 2px;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li a>i
+{
+    color: #b8c7ce;
+    border-radius: 5px;
+    background: #555;
+    padding: 5px;
+    margin: auto;
+    margin-right: 10px;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li:hover>a>i::before,
+body .container-fluid .sidebar-lateral .sidebar-menu .menu li.active>a>i::before
+{
+  color: rgba(127, 213, 245, 0.993);
+  text-shadow: 0px 0px 10px rgba(127, 213, 245, 0.993);
+  display: inline-block;
+  animation: swing ease-in-out 0.5s 1 alternate;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview>a::after
+{
+  content: "\f103";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 700;
+  color: #b8c7ce;
+  line-height: 30px;
+  position: absolute;
+  left: 90%;
+  top: 96px;
+  transform: rotate(0deg);
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview>a::after.active
+{
+  transform: rotate(90deg);
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul{
+  list-style-type: none;
+  list-style-position: outside;
+  padding: 6px 0;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul li
+{
+  padding-left: 40px;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul li a::before
+{
+  
+  content: "\f111";
+  font-family: "Font Awesome 5 Free";
+  font-size: 9px;
+  vertical-align: middle;
+  margin-right: 10px;
+  color: #b8c7ce;
+}
+body .container-fluid .sidebar-lateral .sidebar-menu .menu .treeview ul li a:hover::before
+{
+  
+  color: rgba(127, 213, 245, 0.993);
+  text-shadow: 0px 0px 10px rgba(127, 213, 245, 0.993);
+}
