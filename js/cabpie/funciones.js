@@ -1,7 +1,9 @@
 $(document).ready(()=>{
-    $('.bn').click(()=>{
-        $('.sidebar-lateral').toggleClass("active");
+    $('.sidebar-toggle').click(()=>{
+        $('.main-sidebar').toggleClass("active");
+        $('.logo_mini').toggleClass("active");
         $('.logo-lg').toggleClass("active");
-        $('.logo-mini').toggleClass("active");
+        $('footer').toggleClass("active");
+        $('.logo').toggleClass("active");
     });   
 });

@@ -1,5 +1,5 @@
 <?
-    echo '<pre>';
-    print_r($vectormenu);
-    echo '</pre>';
+    // echo '<pre>';
+    // print_r($vectormenu);
+    // echo '</pre>';
 ?>

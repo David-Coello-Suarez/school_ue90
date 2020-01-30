@@ -16,7 +16,7 @@
         /* funcion para agregar los scripts js*/
         public static function js($js,$type=NULL,$webversion=NULL)
         {
-            return print_r("<script type='".($type!=NULL?"text/javscript":"module")."' language='javascript' src='".$js.( $webversion != NULL ? "?v=$webversion":"" )."'></script>");
+            return print_r("<script type='".($type!=NULL?"text/javascript":"module")."' language='javascript' src='".$js.( $webversion != NULL ? "?v=$webversion":"" )."'></script>");
         }
         
         /* funcion para agregar los scripts js*/
