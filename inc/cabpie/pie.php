@@ -1,3 +1,4 @@
+                </div>
                 <footer>
                     <strong>
                         Copyright  <i class="fas fa-copyright" aria-hidden="true"></i>

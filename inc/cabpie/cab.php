@@ -4,7 +4,7 @@
         <meta charset='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-        <? html::title($parametro["nameEmpresa"]); echo "\r\n" ?>
+        <? html::title($parametro["nameMini"],$varAcceso['nombre']); echo "\r\n" ?>
         <!------------ Library Css ------------>
         <? html::css("lib/css/font-awesome/all.css"); echo "\r\n" ?>
         <? html::css("lib/css/bootstrap/css/bootstrap.min.css"); echo "\r\n" ?>
@@ -18,7 +18,7 @@
                     <a href="./">
                         <span class="logo-mini">
                             <?
-                                $logo_min = str_replace(".","",$parametro['nameEmpresa']);
+                                $logo_min = str_replace(".","",$parametro['nameMini']);
                                 echo '<b>'.$logo_min[0].$logo_min[1].'</b><br>'.$logo_min[2].$logo_min[3];
                             ?>
                         </span>
@@ -111,3 +111,4 @@
                         echo $day=$dias[date('L')].' '.date('d').' de '.$mes[date('n')].', '.date('Y');
                     ?>
                 </section>
+                <div class="container">

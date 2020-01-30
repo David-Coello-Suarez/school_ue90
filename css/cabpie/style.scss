@@ -40,7 +40,7 @@ $alto:55px;
 }
 body .container-fluid
 {
-    display: flex;    
+    display: flex;   
 }
 body .container-fluid .sidebar-lateral,
 body .container-fluid .sidebar-lateral .sidebar-header>a .logo-lg.active,
@@ -60,6 +60,7 @@ body .container-fluid .sidebar-lateral
 body .container-fluid .sidebar-lateral
 {
   width: 250px;
+  min-width: 210px;
   z-index: 810;
   padding: 0;
   height: 100vh;
@@ -276,4 +277,21 @@ body .container-fluid .sidebar-content footer
   background: #fff;
   border-top: 1px solid #d2d6de;
   font-size: 12px;
+}
+$margen:10px;
+body .container-fluid .sidebar-content .date
+{
+  padding: 10px 15px;
+  border-bottom: 2px solid #aaa;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  margin-left: $margen;
+  margin-right: $margen;
+}
+body .container-fluid .sidebar-content .date::before
+{
+  content: "\f073";
+  margin-right: 5px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: bold;
 }

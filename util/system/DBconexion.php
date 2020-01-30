@@ -20,9 +20,8 @@
         {
             try{
                 $pdo = new PDO($this->motor.':host='.$this->server.';dbname='.$this->dataBase.';charset=utf8',$this->user,$this->pass);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->conexion = $pdo;
-            return $this->conexion;
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                return $this->conexion = $pdo;
             }catch( PDOException $e ){
                 Funciones::logs(2,"DBConexion.txt","Error de conexion => ".$e->getMessage());
                 die("Error de conexión. ".$e->getMessage());
@@ -32,11 +31,12 @@
         public function DBConsulta($sql)
         {
             try {
-                $sql = $this->conexion->query($sql);
-                return $sql;
+                $sqli = $this->conexion->query($sql);
+                $sqli=$sqli->fetchAll();
+                return $sqli;
             } catch (Exception $e) {
-                Funciones::logs(2,"DBConsulta.txt","(".$sql.") => ".$e->getMessage() );
-                die("Error de petición."." (".$sql.") ");
+                Funciones::logs(2,"DBConsulta.txt","( ".$sql." ) => ".$e->getMessage() );
+                die("Error de petición. (".$sql.") ");
             }
         }
 
@@ -44,6 +44,7 @@
         {
             if($this->conexion){
                 $this->conexion=null;
+
             }
         }
     }
