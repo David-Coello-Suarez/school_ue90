@@ -4,50 +4,108 @@
         <meta charset='UTF-8'/>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-        <? html::title($parametro['nameMini']); echo "\r\n" ?>
-        <!------------ Library Css ------------>
-        <? html::css('lib/css/bootstrap/css/bootstrap.min.css'); echo "\r\n" ?>
-        <? html::css('lib/css/font-awesome/all.css'); echo "\r\n" ?>
-        <!------------ Script Css ------------->
-        <? html::css('css/cabpie/style.min.css',$parametro['webversion']); ?>
+        <? html::title($parametro['nameEmpresa']); echo "\r\n";?>
+        <!---------- Library Css and FontAwesome ---------->
+        <? html::css("lib/css/bootstrap/css/bootstrap.min.css"); echo "\r\n"; ?>
+        <? html::css("lib/css/font-awesome/all.css"); echo "\r\n"; ?>
+        <!---------- Script Css ---------->
+        <? html::css("css/cabpie/style.min.css",$parametro['webversion']); echo "\r\n"; ?>
     </head>
     <body>
-        <div class='container-fluid'>
-            <header class="main-header">
-                <a href="./" class="logo">
-                    <span class="logo-lg">
-                        <?
-                            $logo=str_replace(".","",$parametro['nameMini']);
-                            echo '<b>'.$logo[0].$logo[1].'</b>'.$logo[2].$logo[3];
+        <div class="wrapper d-flex align-items-stretch">
+            <nav class="sidebar">
+                <div class="sidebar-header p-2">
+                        <a href="<? echo $parametro['paginaDefault']; ?>" >
+                    <h3>
+                        <?php
+                            $logo=explode(" ",str_replace("de","",$parametro['nameEmpresa']));
+                            $arrayLogo=array();
+                            $cont=0;
+                            foreach ($logo as $fila) {
+                                !empty($logo[$cont])? $arrayLogo[].=$logo[$cont]:'';
+                                $cont++;
+                            }
+                            echo $arrayLogo[0].' '.$arrayLogo[1].'<br>'.$arrayLogo[2].' '.$arrayLogo[3];
                         ?>
-                    </span>
-                    <span class="logo_mini">
-                        <?
-                            echo '<b>'.$logo[0].$logo[1].'</b>'.$logo[2].$logo[3];
-                        ?>
-                    </span>
+                    </h3>
                 </a>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="list-unstyled mb-0">
+                        <?  
+                            $listMenu="";
+                            for($f = 0; $f<count($vectorMenu); $f++){
+                                if($vectorMenu[$f]['es_menu']=='SI'){
+                                    $menuActivo="";
+                                    $listMenuInt='<div class="collapse subm" id="sub'.$f.'"> <ul class="list-unstyled mb-0">';
+                                    for($i=0; $i<count($vectorMenu); $i++){
+                                        if(
+                                            $vectorMenu[$i]['es_menu']=='NO' &&
+                                            $vectorMenu[$i]['idpadre']==$vectorMenu[$f]['idmenu']
+                                        ){
+                                            if(
+                                                $pagina==$vectorMenu[$i]['ventana']
+                                            ){
+                                                $menuActivo.="active";
+                                            }
+                                            $listMenuInt.='
+                                                <li class="d-block">
+                                                    <a href="'.$vectorMenu[$i]['ventana'].'">
+                                                        <i class="'.$vectorMenu[$i]['icono'].' mr-1" aria-hidden="true"></i>
+                                                        <span>'.$vectorMenu[$i]['nombre'].'</span>
+                                                    </a>
+                                                </li>
+                                            ';
+                                        }
+                                    }
+                                    if(
+                                        $pagina==$vectorMenu[$f]['ventana']
+                                    ){
+                                        $menuActivo.="active";
+                                    }
+                                    $listMenuInt.='</ul></div>';
+                                    $listMenu.='
+                                        <li class="d-block '.($vectorMenu[$f]['tiene_submenu']=='SI'?'submenu':'').' '.$menuActivo.'">
+                                            <a '.($vectorMenu[$f]['tiene_submenu']=='SI'?'class="collapse" data-toggle="collapse"':'').' href="'.($vectorMenu[$f]['ventana']!=NULL || !empty($vectorMenu[$f]['ventana']) ? $vectorMenu[$f]['ventana']:"#sub".$f).'">
+                                                <i class="'.$vectorMenu[$f]['icono'].' mr-2" aria-hidden="true"></i>
+                                                <span>'.$vectorMenu[$f]['nombre'].'</span>
+                                            </a>
+                                            '.($vectorMenu[$f]['tiene_submenu']=='SI'?$listMenuInt:'').'
+                                        </li>
+                                    ';
+                                }
+                            }
+                            echo $listMenu;
+                        ?>
+                    </ul>
+                </div>
+            </nav>
+            <div class="content">
                 <nav class="navbar">
-                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"></a>
-                    <div class="float-right">
-                        <ul class="nav navbar-nav">
+                    <button type="button" class="btn btn-sm float-left sidebar-toggle">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <div class="float-right mr-4">
+                        <ul class="list-unstyled m-0">
                             <li class="btn-group">
-                                <a href="#" class="btn btn-primary">Administrador</a>
-                                <a href="#exit" class="btn btn-primary" data-toggle="collapse" aria-expanded="false"></a>
-                                <div class="collapse exit" id="exit" style="">
-                                    <ul>
-                                        <li>
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fa fa-user mr-2" aria-hidden="true"></i>
+                                    Administrador
+                                </a>
+                                <a href="#action" class="btn btn-primary" data-toggle="collapse" aria-expanded="false">
+                                </a>
+                                <div class="collapse sign-out" id="action">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="d-block">
                                             <a href="#">
-                                                <span>
-                                                    Perfil
-                                                </span>
+                                                <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+                                                <span>Perfil</span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="d-block">
                                             <a href="#">
-                                                <span>
-                                                    Salir
-                                                </span>
+                                                <i class="fa fa-sign-in-alt mr-2" aria-hidden="true"></i>
+                                                <span>Salir</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -56,55 +114,4 @@
                         </ul>
                     </div>
                 </nav>
-            </header>
-            <aside class="main-sidebar">
-                <ul class="menu">
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-home" aria-hidden="true"></i>
-                            <span>
-                                Inicio
-                            </span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#submenu1" aria-expanded="false" data-toggle="collapse">
-                            <i class="fa fa-cog" aria-hidden="true"></i>
-                            <span>
-                                Configuración
-                            </span>
-                        </a>
-                        <div class="collapse submenu" id="submenu1">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-cogs" aria-hidden="true"></i>
-                                        <span>
-                                            Dashboard 1
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </aside>
-            <footer>
-                <strong>
-                    Copyright <i class="fa fa-copyright" aria-hidden="true"></i>
-                    2014-2019 <a href="http://adminlte.io">AdminLte.oi</a>
-                </strong>
-                All rights reserved.
-                <div class="float-right d-none d-sm-inline-block">
-                    <b>Version:</b> 3.0.1
-                </div>
-            </footer>
-        </div>
-    </body>
-    <!------------ Library Js ------------>
-    <? html::js('lib/js/jquery/jquery.min.js'); echo "\r\n" ?>
-    <? html::js('lib/js/popper/popper.min.js','text'); echo "\r\n" ?>
-    <? html::js('lib/css/bootstrap/js/bootstrap.min.js'); echo "\r\n" ?>
-    <!------------ Script Js ------------>
-    <? html::js("js/cabpie/funciones.js","",$parametro["webversion"]); echo "\r\n"?>
-</html>
+                <div class="container mt-2">

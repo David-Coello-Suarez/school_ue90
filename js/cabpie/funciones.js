@@ -1,9 +1,6 @@
 $(document).ready(()=>{
+    let n=0;
     $('.sidebar-toggle').click(()=>{
-        $('.main-sidebar').toggleClass("active");
-        $('.logo_mini').toggleClass("active");
-        $('.logo-lg').toggleClass("active");
-        $('footer').toggleClass("active");
-        $('.logo').toggleClass("active");
+        $('.sidebar').toggleClass('active');
     });   
 });

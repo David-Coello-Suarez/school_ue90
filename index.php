@@ -59,39 +59,44 @@
             }
         }
         #carga las jerarquias para guardar en el menu de opciones.(prodecimiento almacenado)
-        $resultsubmenu=$conexion->DBConsulta("CALL submenu('Desarrollador')");
-        $vectormenu=array();
+        $menu_principal=$conexion->DBConsulta("CALL menu('Desarrollador')");
+        $vectorMenu=array();
         $cont=0;
-        foreach($resultsubmenu as $fila){
-            $vectormenu[$cont]['idmenu']=intval($fila['idmenu']);
-            $vectormenu[$cont]['idpadre']=intval($fila['idpadre']);
-            $vectormenu[$cont]['nombre']=$fila['nombre'];
-            $vectormenu[$cont]['ventana']=$fila['ventana'];
-            $vectormenu[$cont]['es_menu']=$fila['es_menu'];
-            $vectormenu[$cont]['icono']=$fila['icono'];
+        foreach($menu_principal as $fila){
+            $vectorMenu[$cont]['idmenu']=intval($fila['idmenu']);
+            $vectorMenu[$cont]['idpadre']=($fila['idpadre']!=NULL?intval($fila['idpadre']):'');
+            $vectorMenu[$cont]['nombre']=$fila['nombre'];
+            $vectorMenu[$cont]['ventana']=$fila['ventana'];
+            $vectorMenu[$cont]['es_menu']=$fila['es_menu'];
+            $vectorMenu[$cont]['icono']=$fila['icono'];
+            $vectorMenu[$cont]['tiene_submenu']=$fila['tiene_submenu'];
             $cont++;
         }
-        $idpadreIn='';
-        for ($i=0; $i<count($vectormenu); $i++) { 
-            if($i==0){
-                $idpadreIn.=$vectormenu[$i]['idpadre'];
-            }else{
-                $idpadreIn.=$vectormenu[$i]['idpadre'];
-            }
-        }
-        if(!empty($idpadreIn)){
-            $resultmenu=$conexion->DBConsulta("CALL menu('".(int)$idpadreIn."')");
-            foreach($resultmenu as $fila){
-                $vectormenu[$cont]['idmenu']=intval($fila['idmenu']);
-                $vectormenu[$cont]['idpadre']=intval($fila['idpadre']);
-                $vectormenu[$cont]['nombre']=$fila['nombre'];
-                $vectormenu[$cont]['ventana']=$fila['ventana'];
-                $vectormenu[$cont]['es_menu']=$fila['es_menu'];
-                $vectormenu[$cont]['icono']=$fila['icono'];
-                $cont++;
-            }
-        }
-
+        // if(
+        //     'Desarrollador'!='Desarrollador' ||
+        //     'Administrador'!='Administrador'
+        // ){            
+        //     $idpadre_int='';
+        //     for($f=0; $f<count($vectorMenu); $f++){
+        //         if($f==0){
+        //             $idpadre_int.=$vectorMenu[$f]['idpadre'];
+        //         }else{                
+        //             $idpadre_int.=$vectorMenu[$f]['idpadre'];
+        //         }
+        //     } 
+        //     if(!empty($idpadre_int)){
+        //         $submenu=$conexion->DBConsulta("CALL submenu('$idpadre_int','Desarrollador')");
+        //         foreach($submenu as $fila){
+        //             $vectorMenu[$cont]['idmenu']=intval($fila['idmenu']);
+        //             $vectorMenu[$cont]['idpadre']=intval($fila['idpadre']);
+        //             $vectorMenu[$cont]['nombre']=$fila['nombre'];
+        //             $vectorMenu[$cont]['ventana']=$fila['ventana'];
+        //             $vectorMenu[$cont]['es_menu']=$fila['es_menu'];
+        //             $vectorMenu[$cont]['icono']=$fila['icono'];
+        //             $cont++;
+        //         }
+        //     }
+        // }
         include_once("inc/cabpie/cab.php");
         include_once("inc/$pagina/cuerpo.php");
         include_once("inc/cabpie/pie.php");
