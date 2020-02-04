@@ -19,13 +19,15 @@
 
     if(!$session->checkSession()){
 
+        $usuario='Desarrollador';
+
         $pagina=$parametro['paginaDefault'];
         if(isset($_GET['pagina']) && !empty($_GET['pagina'])){
             $pagina=$_GET['pagina'];
         }
 
         #Revisar el procedimiento almacenado en la base de datos
-        $permisos=$conexion->DBConsulta("CALL permisos('Desarrollador','".$pagina."')");
+        $permisos=$conexion->DBConsulta("CALL permisos('$usuario','".$pagina."')");
         $varAcceso=array();
         foreach ($permisos as $fila) {
             $varAcceso['idacceso']=intval($fila['idacceso']);
@@ -36,7 +38,7 @@
         if(count($varAcceso)==0){
             $flag=false;
             #bandera para revisar si el usuario tiene permisos en algun modulo del sistema.(Prodecimiento almacenado)
-            $resultflag=$conexion->DBConsulta("CALL flag('Desarrollador')");
+            $resultflag=$conexion->DBConsulta("CALL flag('$usuario')");
             foreach($resultflag as $fila){
                 $pagina=$fila['ventana'];
                 $flag=true;
@@ -48,7 +50,7 @@
                 exit();
             }else{
                 #Permisos por pagina
-                $resultopt=$conexion->DBConsulta("CALL permisos('Desarrollador','".$pagina."')");
+                $resultopt=$conexion->DBConsulta("CALL permisos('$usuario','".$pagina."')");
                 $varAcceso=array();
                 foreach ($permisos as $fila) {
                     $varAcceso['idacceso']=intval($fila['idacceso']);
@@ -59,7 +61,7 @@
             }
         }
         #carga las jerarquias para guardar en el menu de opciones.(prodecimiento almacenado)
-        $menu_principal=$conexion->DBConsulta("CALL menu('Desarrollador')");
+        $menu_principal=$conexion->DBConsulta("CALL menu('$usuario')");
         $vectorMenu=array();
         $cont=0;
         foreach($menu_principal as $fila){
@@ -69,34 +71,33 @@
             $vectorMenu[$cont]['ventana']=$fila['ventana'];
             $vectorMenu[$cont]['es_menu']=$fila['es_menu'];
             $vectorMenu[$cont]['icono']=$fila['icono'];
-            $vectorMenu[$cont]['tiene_submenu']=$fila['tiene_submenu'];
             $cont++;
         }
-        // if(
-        //     'Desarrollador'!='Desarrollador' ||
-        //     'Administrador'!='Administrador'
-        // ){            
-        //     $idpadre_int='';
-        //     for($f=0; $f<count($vectorMenu); $f++){
-        //         if($f==0){
-        //             $idpadre_int.=$vectorMenu[$f]['idpadre'];
-        //         }else{                
-        //             $idpadre_int.=$vectorMenu[$f]['idpadre'];
-        //         }
-        //     } 
-        //     if(!empty($idpadre_int)){
-        //         $submenu=$conexion->DBConsulta("CALL submenu('$idpadre_int','Desarrollador')");
-        //         foreach($submenu as $fila){
-        //             $vectorMenu[$cont]['idmenu']=intval($fila['idmenu']);
-        //             $vectorMenu[$cont]['idpadre']=intval($fila['idpadre']);
-        //             $vectorMenu[$cont]['nombre']=$fila['nombre'];
-        //             $vectorMenu[$cont]['ventana']=$fila['ventana'];
-        //             $vectorMenu[$cont]['es_menu']=$fila['es_menu'];
-        //             $vectorMenu[$cont]['icono']=$fila['icono'];
-        //             $cont++;
-        //         }
-        //     }
-        // }
+        if(
+            'Desarrollador'!=$usuario ||
+            'Administrador'!='Administrador'
+        ){            
+            $idpadre_int='';
+            for($f=0; $f<count($vectorMenu); $f++){
+                if($f==0){
+                    $idpadre_int.=$vectorMenu[$f]['idpadre'];
+                }else{                
+                    $idpadre_int.=$vectorMenu[$f]['idpadre'];
+                }
+            } 
+            if(!empty($idpadre_int)){
+                $submenu=$conexion->DBConsulta("CALL submenu('$idpadre_int','$usuario')");
+                foreach($submenu as $fila){
+                    $vectorMenu[$cont]['idmenu']=intval($fila['idmenu']);
+                    $vectorMenu[$cont]['idpadre']=intval($fila['idpadre']);
+                    $vectorMenu[$cont]['nombre']=$fila['nombre'];
+                    $vectorMenu[$cont]['ventana']=$fila['ventana'];
+                    $vectorMenu[$cont]['es_menu']=$fila['es_menu'];
+                    $vectorMenu[$cont]['icono']=$fila['icono'];
+                    $cont++;
+                }
+            }
+        }
         include_once("inc/cabpie/cab.php");
         include_once("inc/$pagina/cuerpo.php");
         include_once("inc/cabpie/pie.php");

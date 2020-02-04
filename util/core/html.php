@@ -47,7 +47,7 @@
 
         public static function table($id=NULL,$th=array(),$class=NULL)
         {
-            $table = "<table id='".($id!=NULL?"$id":"")."' class='table ".($class!=NULL?"$class":"")."'>";
+            $table = "<table id='".($id!=NULL?"$id":"")."' class='table ".($class!=NULL?"$class":"")."' width='100%'>";
             $table .= '<thead>';
             foreach($th as $fila )
             {
