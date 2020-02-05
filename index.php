@@ -7,6 +7,8 @@
     include_once("util/core/html.php");
 
     $session = new Session();
+    
+    error_reporting(0);
 
     $conexion = new DBConexion();
     $conexion->DBConexion();

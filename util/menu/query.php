@@ -27,7 +27,8 @@
                     'nombre'=>$fila['nombre'],
                     'estado'=>$fila['estado']=='A'?'Activo':'Inactivo',
                     'ventana'=>$fila['ventana'],
-                    'icono'=>$fila['icono']
+                    'icono'=>$fila['icono'],
+                    'es_menu'=>$fila['es_menu']
                 );
             }
         }else{
