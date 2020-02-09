@@ -19,13 +19,16 @@
             }
         ?>
         <!---------- Script Css ---------->
-        <? html::css("css/cabpie/style.min.css",$parametro['webversion']); echo "\r\n"; ?>
+        <? html::css("css/cabpie/style.min.css",$parametro['webversion']); echo "\r\n";?>
+        <? html::css("css/$pagina/style.min.css",$parametro['webversion']); echo "\r\n"; ?>
+        
         <!---------- Permisos de la App ---------->
         <input type="hidden" id="pagina" value="<? echo $pagina; ?>">
         <input type="hidden" id="editar" value="1">
         <input type="hidden" id="eliminar" value="1">
         <input type="hidden" id="visual" value="1">
         <input type="hidden" id="insertar" value="1">
+        <input type="hidden" id="logoMini" value="<? echo $parametro['nameMini'] ?>">
     </head>
     <body>
         <div class="wrapper d-flex align-items-stretch">
@@ -51,12 +54,12 @@
                         <?  
                             $listMenu="";
                             for($f = 0; $f<count($vectorMenu); $f++){
-                                if($vectorMenu[$f]['es_menu']=='SI'){
+                                if($vectorMenu[$f]['es_menu']=='S'){
                                     $menuActivo="";
                                     $listMenuInt='<div class="collapse subm" id="sub'.$f.'"> <ul class="list-unstyled mb-0">';
                                     for($i=0; $i<count($vectorMenu); $i++){
                                         if(
-                                            $vectorMenu[$i]['es_menu']=='NO' &&
+                                            $vectorMenu[$i]['es_menu']=='N' &&
                                             $vectorMenu[$i]['idpadre']==$vectorMenu[$f]['idmenu']
                                         ){
                                             if(
@@ -81,12 +84,12 @@
                                     }
                                     $listMenuInt.='</ul></div>';
                                     $listMenu.='
-                                        <li class="d-block '.($vectorMenu[$f]['es_menu']=='SI'?'submenu':'').' '.$menuActivo.'">
-                                            <a '.($vectorMenu[$f]['es_menu']=='SI'?'class="collapse" data-toggle="collapse"':'').' href="'.($vectorMenu[$f]['ventana']!=NULL || !empty($vectorMenu[$f]['ventana']) ? $vectorMenu[$f]['ventana']:"#sub".$f).'">
+                                        <li class="d-block '.($vectorMenu[$f]['es_menu']=='S'?'submenu':'').' '.$menuActivo.'">
+                                            <a '.($vectorMenu[$f]['es_menu']=='S'?'class="collapse" data-toggle="collapse"':'').' href="'.($vectorMenu[$f]['ventana']!=NULL || !empty($vectorMenu[$f]['ventana']) ? $vectorMenu[$f]['ventana']:"#sub".$f).'">
                                                 <i class="'.$vectorMenu[$f]['icono'].' mr-2" aria-hidden="true"></i>
                                                 <span>'.$vectorMenu[$f]['nombre'].'</span>
                                             </a>
-                                            '.($vectorMenu[$f]['es_menu']=='SI'?$listMenuInt:'').'
+                                            '.($vectorMenu[$f]['es_menu']=='S'?$listMenuInt:'').'
                                         </li>
                                     ';
                                 }

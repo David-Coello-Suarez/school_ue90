@@ -10,7 +10,7 @@
     $session = new Session();
 
     try{
-        if(!$session->checkSession()){
+        if($session->checkSession()){
 
             $repuesta = new stdClass();
             $repuesta->estado=1;
@@ -27,16 +27,16 @@
                     'nombre'=>$fila['nombre'],
                     'estado'=>$fila['estado']=='A'?'Activo':'Inactivo',
                     'ventana'=>$fila['ventana'],
-                    'icono'=>$fila['icono'],
-                    'es_menu'=>$fila['es_menu']
+                    'icono'=>'<i class="'.$fila['icono'].' fa-2x"></i>',
+                    'listIcon'=>$fila['icono'],
+                    'es_menu'=>$fila['es_menu']=='S'?'SI':'NO'
                 );
             }
         }else{
-            $repuesta->estado=3;
-            $repuesta->mensaje="Debe iniciar session.";
+            throw new Exception("Debe Iniciar Session.",3);
         }
     }catch(Exception $e){
-        die("Error: "-$e->getMessage());
+        print_r("Error: ".$e->getMessage());
     }
     print_r(json_encode($repuesta));
 ?>

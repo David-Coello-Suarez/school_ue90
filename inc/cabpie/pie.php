@@ -3,7 +3,7 @@
         </div>
     </body>
     <!---------- Library Jquery, Pooppers and Bootstrap ---------->
-    <? html::js("lib/js/jquery/jquery.min.js"); echo "\r\n"?>
+    <? html::js("lib/js/jquery/jquery-3.3.1.min.js",""); echo "\r\n"?>
     <? html::js("lib/js/popper/popper.min.js","text"); echo "\r\n"?>
     <? html::js("lib/css/bootstrap/js/bootstrap.min.js"); echo "\r\n"?>
     <!---------- Library Javascript ---------->

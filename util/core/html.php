@@ -16,7 +16,7 @@
         /* funcion para agregar los scripts js*/
         public static function js($js,$type=NULL,$webversion=NULL)
         {
-            return print_r("<script type='".($type!=NULL?"text/javascript":"module")."' language='javascript' src='".$js.( $webversion != NULL ? "?v=$webversion":"" )."'></script>");
+            return print_r("<script type='".($type!=NULL?"text/javascript":"module")."' src='".$js.( $webversion != NULL ? "?v=$webversion":"" )."'></script>");
         }
         
         /* funcion para agregar inputs*/
@@ -47,7 +47,7 @@
         {
             $select="<div class='form-group'>";
             $select.="<label for='".strtolower($id)."'>$label</label>";
-            $select.="<select name='".strtolower($id)."' name='".strtolower($id)."' class='form-control ".$class."' aria-describedby='help".ucfirst($id)."'>";
+            $select.="<select name='".strtolower($id)."' id='".strtolower($id)."' class='form-control ".$class."' aria-describedby='help".ucfirst($id)."'>";
             foreach($arreglo as $fila=>$i){
                 $select.="<option value='".$arreglo[$fila][$optVal[0]]."'>".$arreglo[$fila][$optVal[1]]."</option>";
             }
@@ -83,14 +83,15 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                         </div>
-                        <div class="modal-body p-2">
-                            '.($detalles).'
-                        </div>
-                        <div class="modal-footer p-2">
-                        '.($buscar>0?"<button type=\"button\" class=\"btn btn-sm btn-success\"><i class=\"fa fa-save mr-1\"></i> Guardar</button>":"").'
-                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><span aria-hidden="true" class="mr-1">&times;</span> Cerrar</button>
-                            
-                        </div>
+                        <form id="form'.ucfirst($id).'" role="form">
+                            <div class="modal-body p-2">
+                                '.($detalles).'
+                            </div>
+                            <div class="modal-footer p-2">
+                            '.($buscar>0?"<button type=\"submit\" class=\"btn btn-sm btn-success\"><i class=\"fa fa-save mr-1\"></i> Guardar</button>":"").'
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><span aria-hidden="true" class="mr-1">&times;</span> Cerrar</button>                            
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>');
@@ -103,7 +104,7 @@
                 $radioCheckbox.="
                     <div class='form-check form-check-inline'>
                         <label class='form-check-label'>
-                            <input type='".$prop[1]."' class='form-check-input' name='".strtolower($prop[2])."' id='".strtolower($prop[2])."' ".($i==0?'checked':'')." value='".strtoupper($prop[3][$i])."' /> ".ucfirst($prop[3][$i])."
+                            <input type='".$prop[1]."' class='form-check-input' name='".strtolower($prop[2])."' id='".strtolower($prop[2]).$i."' ".($i==0?'checked':'')." value='".substr(strtoupper($prop[3][$i]),0,1)."' /> ".ucfirst($prop[3][$i])."
                         </label>
                     </div>
                 ";

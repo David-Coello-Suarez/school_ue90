@@ -19,7 +19,7 @@
             return $check;
         }
 
-        public function createSession( array $data)
+        public function createSession(array $data)
         {
             $_SESSION = array();
             $_SESSION['usuario'] = $data['usuario'];

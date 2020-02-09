@@ -23,7 +23,7 @@
             $repuesta->estado=$estado;
             $repuesta->mensaje=$mensaje;
             $repuesta->data=$data;
-            return $repuesta;
+            return json_encode($repuesta);
         }
     }
 ?>

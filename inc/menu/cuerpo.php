@@ -5,7 +5,7 @@
 </button>
 <?  
     $th=array('Gestión','ID','ID Padre','Nombre','Menú Principal','Librerias','Orden','Estado','Ventana','Icono');
-    html::table('tableMenu',$th,'table-responsive-md'); 
+    html::table('tableMenu',$th,'table-responsive-sm text-center'); 
     $json=array(
         ["nombre"=>"david","iso"=>"da","edad"=>12],
         ["nombre"=>"fernando","iso"=>"fe","edad"=>15],
@@ -14,7 +14,6 @@
     );
     $search=array("edad","nombre");
     $formulario='
-        <form id="formMenu">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
@@ -45,7 +44,6 @@
                     </div>
                 </div>
             </div>
-        </form>
     ';
     html::modal('modalMenu','Nuevo Menú',$formulario,'modal-dialog-centered');
 ?>

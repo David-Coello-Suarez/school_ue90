@@ -1,27 +1,19 @@
-export let data=(urls,data=null,btn=null)=>{
-    let datas='',bt='';
+export let data=(server,datos=null)=>{
+    let datas='';
     $.ajax({
         async:false,
         type:'POST',
-        url:urls,
         dataType:'json',
-        data:data!=""?data:'',
+        url: server,
+        data: datos,
+        cache: false,
+        processData: false,
+        contentType: false,
         error:(error, status, request)=>{
-            console.log(error);
+            datas=error;
         },
-        beforeSend:()=>{
-            if(btn!=null){
-                bt=$(`${btn}`)[0].textContent;
-                $(`${btn}`).html(`<i class="fas fa-circle-notch fa-spin"></i>`);
-            }
-        },
-        success:(repuesta)=>{
-            datas=repuesta;
-        },
-        complete:()=>{
-            if (btn != "") {
-                $(`${btn}`).html(bt);
-            }
+        success:(respuesta)=>{
+            datas=respuesta;
         }
     });
     return datas;
