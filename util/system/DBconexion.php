@@ -32,10 +32,10 @@
         {
             try {
                 $sqli = $this->conexion->query($sql);
-                $sqli=$sqli->fetchAll();
-                return $sqli;
+                $mysql=$sqli->fetchAll();
+                return $mysql;
             } catch (Exception $e) {
-                Funciones::logs(2,"DBConsulta.txt","( ".$sql." ) => ".$e->getMessage() );
+                Funciones::logs(1,"DBConsulta.txt","( ".$sql." ) => ".$e->getMessage() );
                 die("Error de petición. (".$sql.") ");
             }
         }

@@ -7,7 +7,7 @@
     try{
         $session = new Session();
 
-        if($session->checkSession()){
+        if(!$session->checkSession()){
 
             $conexion = new DBConexion();
             $conexion->DBConexion();
@@ -28,13 +28,13 @@
                 ( isset($_POST['nombre']) && !empty($_POST['nombre']) ) &&
                 ( isset($_POST['orden']) && !empty($_POST['orden']) ) &&
                 ( isset($_POST['es_menu']) && !empty($_POST['es_menu']) ) &&
-                ( isset($_POST['estado']) && !empty($_POST['estado']) ) 
+                ( isset($_POST['estado']) && !empty($_POST['estado']) ) &&
                 ( isset($_POST['listicons']) && !empty($_POST['listicons']) )
             ){
                 $idmenu=(int)addslashes($_POST['idmenu']);
                 $idpadre=(int)addslashes($_POST['idpadre']);
-                $orden=(int)addslashes($_POST['nombre']);
-                $nombre=ucfirst(addslashes($_POST['orden']));
+                $orden=(int)addslashes($_POST['orden']);
+                $nombre=ucfirst(addslashes($_POST['nombre']));
                 $es_menu=ucfirst(addslashes($_POST['es_menu']));
                 $estado=ucfirst(addslashes($_POST['estado']));
                 $listicons=strtolower(addslashes($_POST['listicons']));
@@ -50,9 +50,11 @@
             
             $librerias=str_replace(",,",",",strtolower($librerias));
 
-            $sql=$conexion->DBConsulta("");
-
-            print_r(Funciones::json(1,NULL,$sql));
+            $sql=$conexion->DBConsulta("
+                CALL school_ue9o.updateMenu($idmenu,'$nombre',@respuesta);
+            ");
+            $sql=explode(",",$sql[0]['respuesta']);
+            print_r(Funciones::json($sql[0],$sql[1]));
 
         }else{
             throw new Exception("",3);

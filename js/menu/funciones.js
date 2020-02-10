@@ -1,4 +1,4 @@
-import {data,permisos} from '../module/funciones.js?v=19';
+import {data,permisos} from '../module/funciones.js?v=25';
 let cargarData =()=>{
     let datas=data(`util/${$('#pagina').val()}/query.php`);
     switch(datas.estado){
@@ -28,6 +28,7 @@ let cargarData =()=>{
             );
             break;
     }
+    return false;
 }
 
 $(document).ready(function(){
@@ -55,8 +56,7 @@ $(document).ready(function(){
         $('#listicons option[value="'+date["listIcon"]+'"]').prop({selected:true});
     });
 
-    $("#formModalMenu").submit(function(e){
-        e.preventDefault();
+    $("#formModalMenu").submit(function(event){
         
         let formData=new FormData();
         formData.append('idmenu',$("#idmenu").val());
@@ -69,8 +69,16 @@ $(document).ready(function(){
         formData.append('estado',$('input:radio[name=estado]:checked').val().substring(0,1));
         formData.append('listicons',$("#listicons option:selected").val());
 
-        //let estado=data(`util/${$('#pagina').val()}/gestion.php`,formData);
-
+        let respuesta=data(`util/${$('#pagina').val()}/gestion.php`,formData);
+        console.log(respuesta);
+        switch(respuesta.estado){
+            case 1:
+                console.log(respuesta);
+                break;
+            case 2:
+                console.log('no');
+                break;
+        }
         return false;
     });
 });

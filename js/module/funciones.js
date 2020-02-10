@@ -10,7 +10,7 @@ export let data=(server,datos=null)=>{
         processData: false,
         contentType: false,
         error:(error, status, request)=>{
-            datas=error;
+            console.log(error.responseText);
         },
         success:(respuesta)=>{
             datas=respuesta;

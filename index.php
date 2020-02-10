@@ -19,7 +19,7 @@
         $parametro[trim($fila["nombre"])] = trim($fila['valor']);
     }
 
-    if($session->checkSession()){
+    if(!$session->checkSession()){
 
         $usuario='Desarrollador';
 

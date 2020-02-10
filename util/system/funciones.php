@@ -17,7 +17,7 @@
             fwrite($arch, date("Y-m-d H:i:s")." >>>> ".$desc."\r\n");
             fclose($arch);
         }
-        public static function json($estado=3,$data=array(),$mensaje=NULL)
+        public static function json($estado=3,$mensaje=NULL,$data=array())
         {
             $repuesta = new stdClass();
             $repuesta->estado=$estado;

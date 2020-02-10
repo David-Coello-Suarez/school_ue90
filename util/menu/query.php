@@ -10,7 +10,7 @@
     $session = new Session();
 
     try{
-        if($session->checkSession()){
+        if(!$session->checkSession()){
 
             $repuesta = new stdClass();
             $repuesta->estado=1;
