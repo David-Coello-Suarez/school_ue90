@@ -19,10 +19,12 @@
 
             $peticion=$conexion->DBConsulta("SELECT * FROM lista_menu");
             foreach($peticion as $fila){
+                $subString = !empty($fila['libreria']) || strlen($fila['libreria'])>10 ? substr($fila['libreria'],0,11).' .....':'';
                 $repuesta->data[]=array(
                     'idmenu'=>intval($fila['idmenu']),
                     'orden'=>intval($fila['orden']),
-                    'idpadre'=>$fila['orden']!=NULL?intval($fila['orden']):'',
+                    'idpadre'=>intval($fila['idpadre']),
+                    'librerias'=>$subString,
                     'libreria'=>$fila['libreria'],
                     'nombre'=>$fila['nombre'],
                     'estado'=>$fila['estado']=='A'?'Activo':'Inactivo',

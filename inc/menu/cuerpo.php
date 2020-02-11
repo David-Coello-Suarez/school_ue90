@@ -18,21 +18,21 @@
                 <div class="row">
                     <div class="col-md-4">
                         '.
-                        html::input(array('idmenu','number','ID Menú principal',$parametro['numMaxMenu'],'Ej. ID Menú 2','form-control-sm','Configura esta opción si eres desarrollador','disabled',"0")).
-                        html::input(array('nombre','text','Nombre del Menú','','Eje. Plantilla A','form-control-sm','Nombre del Menú Principal','')).
+                        html::input(array('idmenu','number','ID Menú principal',$parametro['numMaxMenu'],'Ej. ID Menú 2','form-control-sm','Configura esta opción si eres desarrollador','disabled',NULL)).
+                        html::input(array('nombre','text','Nombre del Menú','','Eje. Plantilla A','form-control-sm','Nombre del Menú Principal',NULL)).
                         html::select("listIcons",'Lista de Iconos',$json,$search,"Selección de Iconos")
                         .'
                     </div>
                     <div class="col-md-4">
                         '.
-                            html::input(array("idpadre","number","ID Padre",$parametro['numMaxMenu'],"Eje. ID Padre 2","form-control-sm","Menú Principal al que pertenecera este submenu",'')).
-                            html::input(array('ventana','text','Nombre de la ventana','','Eje. Plantilla de Configuración','form-control-sm','Nombre de la ventana','disabled')).
+                            html::input(array("idpadre","number","ID Padre",$parametro['numMaxMenu'],"Eje. ID Padre 2","form-control-sm","Menú Principal al que pertenecera este submenu",NULL)).
+                            html::input(array('ventana','text','Nombre de la ventana','','Eje. Plantilla de Configuración','form-control-sm','Nombre de la ventana',NULL)).
                             html::textarea(array("Librerias","Librerias que se va a utilizar","form-control-sm","Eje. Libreria A, Libreria B, Etc","Configura esta opción si eres desarrollador",''))
                         .'
                     </div>
                     <div class="col-md-4">
                         '.
-                            html::input(array('orden','number','Orden',$parametro['numMaxMenu'],'Eje. Orden 3','form-control-sm','Esta opción sirve para mostrar el orden del submenu',''))
+                            html::input(array('orden','number','Orden',$parametro['numMaxMenu'],'Eje. Orden 3','form-control-sm','Esta opción sirve para mostrar el orden del submenu',NULL))
                             
                             .'
                         <div class="row ml-0 mt-4">
@@ -45,5 +45,5 @@
                 </div>
             </div>
     ';
-    html::modal('modalMenu','Nuevo Menú',$formulario,'modal-dialog-centered');
+    html::modal('menu','Nuevo Menú',$formulario,'modal-dialog-centered');
 ?>

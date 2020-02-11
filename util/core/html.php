@@ -25,7 +25,7 @@
             $inputs="
                 <div class='form-group'>
                     <label for='".strtolower($prop[0])."'>".$prop[2]."</label>
-                    <input type='".$prop[1]."' ".($prop[1]=='number'?'min="1" max="'.$prop[3].'"':' placeholder="'.$prop[4].'"')." class='form-control ".$prop[5]."' id='".strtolower($prop[0])."' name='".strtolower($prop[0])."' aria-describedby='help".ucfirst($prop[0])."' ".($prop[7]!=NULL?$prop[7]:'')." placeholder='".$prop[8]."'  />
+                    <input type='".$prop[1]."' ".($prop[1]=='number'?'min="0" max="'.$prop[3].'" placeholder="1"':' placeholder="'.$prop[4].'"')." class='form-control ".$prop[5]."' id='".strtolower($prop[0])."' name='".strtolower($prop[0])."' aria-describedby='help".ucfirst($prop[0])."' ".($prop[7]!=NULL?$prop[7]:'')." />
                     <small id='help".ucfirst($prop[0])."' class='text-muted'>".$prop[6]."</small>
                 </div>
             "; 
@@ -70,12 +70,12 @@
             return print_r($table);
         }
 
-        public static function modal($id,$title,$detalles,$tamaño=NULL)
+        public static function modal($id,$title=NULL,$detalles=NULL,$tamaño=NULL)
         {
             $buscar=strpos($detalles,'form');
             print_r('
-            <div class="modal fade pl-0 pr-0" id="'.($id).'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                <div class="modal-dialog '.$tamaño.'" role="document"  style="max-width: 1100px;">
+            <div class="modal fade pl-0 pr-0" id="modal'.ucfirst($id).'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                <div class="modal-dialog '.$tamaño.'" role="document" '.($buscar>0?"style='max-width: 1100px;'":"").'>
                     <div class="modal-content">
                         <div class="modal-header p-2">
                             <h5 class="modal-title">'.($title).'</h5>
@@ -83,15 +83,15 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                         </div>
-                        <form id="form'.ucfirst($id).'" role="form">
-                            <div class="modal-body p-2">
-                                '.($detalles).'
-                            </div>
-                            <div class="modal-footer p-2">
-                            '.($buscar>0?"<button type=\"submit\" class=\"btn btn-sm btn-success\"><i class=\"fa fa-save mr-1\"></i> Guardar</button>":"").'
-                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><span aria-hidden="true" class="mr-1">&times;</span> Cerrar</button>                            
-                            </div>
-                        </form>
+                        '.($buscar>0?"<form id='form".ucfirst($id)."' role='form'>":"").'
+                        <div class="modal-body p-2">
+                            '.($detalles).'
+                        </div>
+                        <div class="modal-footer p-2">
+                        '.($buscar>0?"<button type=\"submit\" class=\"btn btn-sm btn-success\"><i class=\"fa fa-save mr-1\"></i> Guardar</button>":"").'
+                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><span aria-hidden="true" class="mr-1">&times;</span> Cerrar</button>                            
+                        </div>
+                        '.($buscar>0?"</form>":"").'
                     </div>
                 </div>
             </div>');

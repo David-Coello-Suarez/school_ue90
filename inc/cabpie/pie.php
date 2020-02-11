@@ -10,7 +10,7 @@
     <?
         for($f=0; $f<count($varAcceso['libreria']); $f++){
             switch ($varAcceso['libreria'][$f]) {
-                case 'Datatables':
+                case 'datatables':
                     html::js("lib/js/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"); echo "\r\n";
                     break;
             }

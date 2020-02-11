@@ -20,7 +20,7 @@
         public static function json($estado=3,$mensaje=NULL,$data=array())
         {
             $repuesta = new stdClass();
-            $repuesta->estado=$estado;
+            $repuesta->estado=(int)$estado;
             $repuesta->mensaje=$mensaje;
             $repuesta->data=$data;
             return json_encode($repuesta);

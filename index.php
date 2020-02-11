@@ -8,7 +8,7 @@
 
     $session = new Session();
     
-    error_reporting(0);
+    #error_reporting(0);
 
     $conexion = new DBConexion();
     $conexion->DBConexion();
@@ -29,7 +29,7 @@
         }
 
         #Revisar el procedimiento almacenado en la base de datos
-        $permisos=$conexion->DBConsulta("CALL permisos('$usuario','".$pagina."')");
+        $permisos=$conexion->DBConsulta("CALL permisos('$usuario','$pagina')");
         $varAcceso=array();
         foreach ($permisos as $fila) {
             $varAcceso['idacceso']=intval($fila['idacceso']);
@@ -52,7 +52,7 @@
                 exit();
             }else{
                 #Permisos por pagina
-                $resultopt=$conexion->DBConsulta("CALL permisos('$usuario','".$pagina."')");
+                $resultopt=$conexion->DBConsulta("CALL permisos('$usuario','$pagina')");
                 $varAcceso=array();
                 foreach ($permisos as $fila) {
                     $varAcceso['idacceso']=intval($fila['idacceso']);

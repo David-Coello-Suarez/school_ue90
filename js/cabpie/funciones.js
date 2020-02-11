@@ -1,6 +1,7 @@
 $(document).ready(()=>{
     $('.sidebar-toggle').click(()=>{
         $('.sidebar').toggleClass('active');
+        $('.content').toggleClass("active");
     });   
     let editar=$('#editar').val(),  
     eliminar=$('#eliminar').val(),

@@ -12,7 +12,7 @@
         <?
             for($f=0; $f<count($varAcceso['libreria']); $f++){
                 switch ($varAcceso['libreria'][$f]) {
-                    case 'Datatables':
+                    case 'datatables':
                         html::css("lib/js/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css",1); echo "\r\n";
                         break;
                 }
@@ -31,6 +31,7 @@
         <input type="hidden" id="logoMini" value="<? echo $parametro['nameMini'] ?>">
     </head>
     <body>
+        <? html::modal('mensaje',"","",'modal-sm'); ?>
         <div class="wrapper d-flex align-items-stretch">
             <nav class="sidebar">
                 <div class="sidebar-header p-2">
@@ -85,7 +86,7 @@
                                     $listMenuInt.='</ul></div>';
                                     $listMenu.='
                                         <li class="d-block '.($vectorMenu[$f]['es_menu']=='S'?'submenu':'').' '.$menuActivo.'">
-                                            <a '.($vectorMenu[$f]['es_menu']=='S'?'class="collapse" data-toggle="collapse"':'').' href="'.($vectorMenu[$f]['ventana']!=NULL || !empty($vectorMenu[$f]['ventana']) ? $vectorMenu[$f]['ventana']:"#sub".$f).'">
+                                            <a '.($vectorMenu[$f]['es_menu']=="S" && empty($vectorMenu[$f]['ventana'])?"class='collapse aSub' data-toggle='collapse'":"").' href="'.(!empty($vectorMenu[$f]['ventana']) ? $vectorMenu[$f]['ventana']:"#sub".$f ).'">
                                                 <i class="'.$vectorMenu[$f]['icono'].' mr-2" aria-hidden="true"></i>
                                                 <span>'.$vectorMenu[$f]['nombre'].'</span>
                                             </a>
@@ -100,10 +101,15 @@
                 </div>
             </nav>
             <div class="content">
-                <nav class="navbar">
+                <nav class="navbar sticky-top">
                     <button type="button" class="btn btn-sm float-left sidebar-toggle">
                         <i class="fa fa-bars" aria-hidden="true"></i>
                     </button>
+                    <div class="mx-auto text-white d-none d-lg-block" style="font-weight: bold;font-size: 1.3rem;">
+                        <?  
+                            echo $parametro['nameEmpresa'];
+                        ?>
+                    </div>
                     <div class="float-right mr-4">
                         <ul class="list-unstyled m-0">
                             <li class="btn-group">
@@ -134,3 +140,11 @@
                     </div>
                 </nav>
                 <div class="container mt-2">
+                    <section class="breadcrumb">
+                        <i class="fa fa-calendar-alt align-self-center mr-2" aria-hidden="true"></i>
+                        <?
+                            $arrayDias=array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+                            $arrayMeses=array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+                            echo $arrayDias[date("N")].", ".date("d")." de ".$arrayMeses[date("n")-1]." del ".date("Y");
+                        ?>
+                    </section>

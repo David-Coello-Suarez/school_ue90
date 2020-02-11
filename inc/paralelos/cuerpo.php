@@ -1,0 +1,1 @@
+<h1>Este es la pantall de paralelos</h1>

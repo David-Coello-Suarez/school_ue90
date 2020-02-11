@@ -14,23 +14,25 @@ $height:65px;
 .wrapper>.sidebar>.sidebar-menu>ul>.submenu>.subm>ul>li>a,
 .wrapper>.navbar .sign-out>ul>li>a,
 .wrapper>.navbar>button[type="button"],
-.wrapper>.navbar .btn-primary
+.wrapper>.navbar .btn-primary,
+.wrapper>.content
 {
-    transition: all .2s ease;
+    transition: all .3s ease;
 }
+$height-sidebar:240px;
 .wrapper>.sidebar
 {
-    min-width: 220px;
-    max-width: 220px;
+    min-width: $height-sidebar;
+    max-width: $height-sidebar;
     height: 100vh;
-    min-height: 100vh;
+    max-height: 100vh;
+    position: fixed;
     background: #222d32;
     color: #b8c7ce;
-    overflow: hidden;
 }
 .wrapper>.sidebar.active
 {
-    margin-left: -220px;
+    margin-left: -$height-sidebar;
 }
 .wrapper>.sidebar>.sidebar-header
 {
@@ -91,7 +93,7 @@ $height:65px;
     border-left-color: #3c8dbc;
     cursor: pointer;
 }
-.wrapper>.sidebar>.sidebar-menu .submenu>a::after
+.wrapper>.sidebar>.sidebar-menu .submenu>.aSub::after
 {
     content: "\f103";
     font-family: "Font Awesome 5 Free";
@@ -130,6 +132,12 @@ $height:65px;
 .wrapper>.content
 {
     width: 100%;
+    min-height: 100vh;
+    padding-left: $height-sidebar;
+}
+.wrapper>.content.active
+{
+    padding-left: 0px;
 }
 .wrapper>.content>.navbar
 {
