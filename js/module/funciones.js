@@ -6,11 +6,11 @@ export let data=(server,datos=null)=>{
         dataType:'json',
         url: server,
         data: datos,
-        cache: false,
-        processData: false,
-        contentType: false,
+        cache:false,
+        processData:false,
+        contentType:false,
         error:(error, status, request)=>{
-            console.log(error.responseText);
+            datas = error;
         },
         success:(respuesta)=>{
             datas=respuesta;

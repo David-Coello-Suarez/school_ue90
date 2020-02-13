@@ -1,1 +1,3 @@
-<h1>Este es la pantall de paralelos</h1>
+<?
+    html::table("IDParalelos",array("ID Paralelo","Paralelo", "Estado", "Fecha Registro"),"table-responsive-md");
+?>

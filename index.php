@@ -8,7 +8,7 @@
 
     $session = new Session();
     
-    #error_reporting(0);
+    error_reporting(0);
 
     $conexion = new DBConexion();
     $conexion->DBConexion();

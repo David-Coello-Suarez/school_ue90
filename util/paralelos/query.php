@@ -13,7 +13,8 @@
                 $data[]=array(
                     'id'=>intval($fila['idParalelo']),
                     'paralelo'=>$fila['paralelo'],
-                    'estado'=>$fila['estado']=="A"?'<button type="button" class="btn p-1 btn-outline-success"><i class="fa fa-check p-1 rounded-circle" aria-hidden="true"></i> <spna>Activo</span></button>':'<button type="button" class="btn p-1 btn-outline-danger"><i class=" fa  fa-times p-1 rounded-circle" aria-hidden="true"></i> <spna>Inactivo</span> </button> ',
+                    'estado'=>ucfirst($fila['estado']),
+                    'estados'=>$fila['estado']=="A"?'<button type="button" class="btn p-1 btn-outline-success"><i class="fa fa-check p-1 rounded-circle" aria-hidden="true"></i> <spna>Activo</span></button>':'<button type="button" class="btn p-1 btn-outline-danger"><i class=" fa  fa-times p-1 rounded-circle" aria-hidden="true"></i> <spna>Inactivo</span> </button> ',
                     'registro'=>date($fila['registro'])
                 );
             }

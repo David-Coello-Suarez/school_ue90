@@ -19,7 +19,7 @@
         public function DBConexion()
         {
             try{
-                $pdo = new PDO($this->motor.':host='.$this->server.';dbname='.$this->dataBase.';charset=utf8',$this->user,$this->pass);
+                $pdo = new PDO($this->motor.':host='.$this->server.';dbname='.$this->dataBase.';',$this->user,$this->pass);
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 return $this->conexion = $pdo;
             }catch( PDOException $e ){
@@ -35,8 +35,8 @@
                 $mysql=$sqli->fetchAll();
                 return $mysql;
             } catch (Exception $e) {
-                Funciones::logs(1,"DBConsulta.txt","( ".$sql." ) => ".$e->getMessage() );
-                die("Error de petición. (".$sql.") ");
+                Funciones::logs(2,"DBConsulta.txt","( ".$sql." ) => ".$e->getMessage() );
+                die("Error de petición. (".$sql.")");
             }
         }
 

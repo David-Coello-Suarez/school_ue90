@@ -113,5 +113,16 @@
             return $radioCheckbox;
 
         }
+
+        public static function estado($estado)
+        {
+            if($estado=="A"){
+                return '<button type="button" class="btn btn-sm p-1 btn-outline-success estado" title="Activo"><i class="fa fa-check p-1 rounded-circle" aria-hidden="true"></i></button>';
+            }elseif($estado=="I"){
+                return '<button type="button" class="btn btn-sm p-1 btn-outline-danger estado" title="Inactivo"><i class="fa  fa-times p-1 rounded-circle" aria-hidden="true"></i></button>';
+            }elseif($estado=="E"){
+                return '<button type="button" class="btn btn-sm p-1 btn-outline-info editar mr-2"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
+            }
+        }
     }
 ?>

@@ -33,7 +33,7 @@
     <body>
         <? html::modal('mensaje',"","",'modal-sm'); ?>
         <div class="wrapper d-flex align-items-stretch">
-            <nav class="sidebar">
+            <nav class="sidebar active">
                 <div class="sidebar-header p-2">
                     <a href="<? echo $parametro['paginaDefault']; ?>" >
                         <h3>
@@ -57,7 +57,7 @@
                             for($f = 0; $f<count($vectorMenu); $f++){
                                 if($vectorMenu[$f]['es_menu']=='S'){
                                     $menuActivo="";
-                                    $listMenuInt='<div class="collapse subm" id="sub'.$f.'"> <ul class="list-unstyled mb-0">';
+                                    $listMenuInt='<div class="collapse subm" id="sub'.$f.'"> <ul class="list-unstyled">';
                                     for($i=0; $i<count($vectorMenu); $i++){
                                         if(
                                             $vectorMenu[$i]['es_menu']=='N' &&
@@ -100,7 +100,7 @@
                     </ul>
                 </div>
             </nav>
-            <div class="content">
+            <div class="content active">
                 <nav class="navbar sticky-top">
                     <button type="button" class="btn btn-sm float-left sidebar-toggle">
                         <i class="fa fa-bars" aria-hidden="true"></i>

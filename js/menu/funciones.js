@@ -33,9 +33,6 @@ let cargarData =()=>{
 
 $(document).ready(function(){
     cargarData();
-
-
-
     $('#tableMenu').on('click','.editar',function(){
         let date = $('#tableMenu').DataTable().row( $(this).closest('tr') ).data();
         $('#idmenu').val(date['idmenu']);
@@ -48,7 +45,6 @@ $(document).ready(function(){
         $('input:radio[name=estado][value='+date['estado'].substring(0,1)+']').prop({checked:true});
         $('#listicons option[value="'+date["listIcon"]+'"]').prop({selected:true});
 
-        console.log(date['orden']);
 
         $('#modalMenu').modal('show');
     });
@@ -67,8 +63,6 @@ $(document).ready(function(){
         formData.append('es_menu',$('input:radio[name=es_menu]:checked').val().substring(0,1));
         formData.append('estado',$('input:radio[name=estado]:checked').val().substring(0,1));
         formData.append('listicons',$("#listicons option:selected").val());
-        
-        console.log($('#orden').val());
 
         let respuesta=data(`util/${$('#pagina').val()}/gestion.php`,formData);
         switch (respuesta.estado) {
