@@ -83,13 +83,13 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                         </div>
-                        '.($buscar>0?"<form id='form".ucfirst($id)."' role='form'>":"").'
+                        '.($buscar>0?"<form id='modal".ucfirst($id)."' role='form' enctype='multipart/form'  >":"").'
                         <div class="modal-body p-2">
                             '.($detalles).'
                         </div>
                         <div class="modal-footer p-2">
-                        '.($buscar>0?"<button type=\"submit\" class=\"btn btn-sm btn-success\"><i class=\"fa fa-save mr-1\"></i> Guardar</button>":"").'
-                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><span aria-hidden="true" class="mr-1">&times;</span> Cerrar</button>                            
+                        '.($buscar>0?"<button type=\"submit\" class=\"btn btn-sm btn-outline-success\"><i class=\"fa fa-save mr-1\"></i> Guardar</button>":"").'
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal"><span aria-hidden="true" class="mr-1">&times;</span> Cerrar</button>                            
                         </div>
                         '.($buscar>0?"</form>":"").'
                     </div>
@@ -121,7 +121,7 @@
             }elseif($estado=="I"){
                 return '<button type="button" class="btn btn-sm p-1 btn-outline-danger estado" title="Inactivo"><i class="fa  fa-times p-1 rounded-circle" aria-hidden="true"></i></button>';
             }elseif($estado=="E"){
-                return '<button type="button" class="btn btn-sm p-1 btn-outline-info editar mr-2"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>';
+                return '<button type="button" class="btn btn-sm p-1 btn-outline-info editar mr-2"><i class="fa fa-pencil" aria-hidden="true"></i></button>';
             }
         }
     }

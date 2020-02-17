@@ -1,4 +1,4 @@
-import {data,permisos} from '../module/funciones.js?v=25';
+import {data,permisos} from '../module/funciones.js?v=251';
 let cargarData =()=>{
     let datas=data(`util/${$('#pagina').val()}/query.php`);
     switch(datas.estado){
@@ -30,9 +30,19 @@ let cargarData =()=>{
     }
     return false;
 }
+let listasIcons=()=>{
+    $.getJSON('./lib/fontawesome-icons-list/icons.json',(e)=>{
+        let option_icons="<option>Selecione un icono</option>";
+        for(let i in e){
+            option_icons+="<option value='"+e[i]+"'>"+e[i]+"</option>";
+        }
+        $("#listicons").html(option_icons);
+    });
+}
 
 $(document).ready(function(){
     cargarData();
+    listasIcons();
     $('#tableMenu').on('click','.editar',function(){
         let date = $('#tableMenu').DataTable().row( $(this).closest('tr') ).data();
         $('#idmenu').val(date['idmenu']);

@@ -96,7 +96,7 @@ $height-sidebar:240px;
 .wrapper>.sidebar>.sidebar-menu .submenu>.aSub::after
 {
     content: "\f103";
-    font-family: "Font Awesome 5 Free";
+    font: normal normal normal 14px/1 FontAwesome;
     font-weight: bold;
     position: absolute;
     right: 10px;
@@ -148,7 +148,7 @@ $height-sidebar:240px;
 .wrapper>.content>.navbar a[href="#action"]::before
 {
     content: "\f0d7";
-    font-family: "Font Awesome 5 Free";
+    font: normal normal normal 14px/1 FontAwesome;
     font-weight: bold;
 }
 .wrapper>.content>.navbar .sign-out

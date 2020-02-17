@@ -3,15 +3,18 @@
         </div>
     </body>
     <!---------- Library Jquery, Pooppers and Bootstrap ---------->
-    <? html::js("lib/js/jquery/jquery-3.3.1.min.js",""); echo "\r\n"?>
-    <? html::js("lib/js/popper/popper.min.js","text"); echo "\r\n"?>
-    <? html::js("lib/css/bootstrap/js/bootstrap.min.js"); echo "\r\n"?>
+    <? html::js("https://code.jquery.com/jquery-3.4.1.min.js",""); echo "\r\n"?>
+    <? html::js("https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js","text"); echo "\r\n"?>
+    <? html::js("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"); echo "\r\n"?>
     <!---------- Library Javascript ---------->
     <?
         for($f=0; $f<count($varAcceso['libreria']); $f++){
             switch ($varAcceso['libreria'][$f]) {
                 case 'datatables':
                     html::js("lib/js/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"); echo "\r\n";
+                    break;
+                case 'imask':
+                    html::js("https://cdnjs.cloudflare.com/ajax/libs/imask/6.0.1/imask.min.js"); echo "\r\n";
                     break;
             }
         }

@@ -1,13 +1,12 @@
 <!Doctype HTML>
 <html lang='es'>
     <head>
-        <meta charset='UTF-8'/>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <? html::title($parametro['nameEmpresa']); echo "\r\n";?>
         <!---------- Library Css and FontAwesome ---------->
-        <? html::css("lib/css/bootstrap/css/bootstrap.min.css"); echo "\r\n"; ?>
-        <? html::css("lib/css/font-awesome/all.css"); echo "\r\n"; ?>
+        <? html::css("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"); echo "\r\n"; ?>
+        <? html::css("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"); echo "\r\n"; ?>
         <!---------- Library Css Element ---------->
         <?
             for($f=0; $f<count($varAcceso['libreria']); $f++){
@@ -71,7 +70,7 @@
                                             $listMenuInt.='
                                                 <li class="d-block">
                                                     <a href="'.$vectorMenu[$i]['ventana'].'">
-                                                        <i class="'.$vectorMenu[$i]['icono'].' mr-1" aria-hidden="true"></i>
+                                                        <i class="fa '.$vectorMenu[$i]['icono'].' mr-1" aria-hidden="true"></i>
                                                         <span>'.$vectorMenu[$i]['nombre'].'</span>
                                                     </a>
                                                 </li>
@@ -87,7 +86,7 @@
                                     $listMenu.='
                                         <li class="d-block '.($vectorMenu[$f]['es_menu']=='S'?'submenu':'').' '.$menuActivo.'">
                                             <a '.($vectorMenu[$f]['es_menu']=="S" && empty($vectorMenu[$f]['ventana'])?"class='collapse aSub' data-toggle='collapse'":"").' href="'.(!empty($vectorMenu[$f]['ventana']) ? $vectorMenu[$f]['ventana']:"#sub".$f ).'">
-                                                <i class="'.$vectorMenu[$f]['icono'].' mr-2" aria-hidden="true"></i>
+                                                <i class="fa '.$vectorMenu[$f]['icono'].' mr-2" aria-hidden="true"></i>
                                                 <span>'.$vectorMenu[$f]['nombre'].'</span>
                                             </a>
                                             '.($vectorMenu[$f]['es_menu']=='S'?$listMenuInt:'').'
@@ -145,6 +144,6 @@
                         <?
                             $arrayDias=array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
                             $arrayMeses=array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-                            echo $arrayDias[date("N")].", ".date("d")." de ".$arrayMeses[date("n")-1]." del ".date("Y");
+                            echo $arrayDias[date("N")-1].", ".date("d")." de ".$arrayMeses[date("n")-1]." del ".date("Y");
                         ?>
                     </section>

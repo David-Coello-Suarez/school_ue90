@@ -29,7 +29,7 @@
                     'nombre'=>$fila['nombre'],
                     'estado'=>$fila['estado']=='A'?'Activo':'Inactivo',
                     'ventana'=>$fila['ventana'],
-                    'icono'=>'<i class="'.$fila['icono'].' fa-2x"></i>',
+                    'icono'=>'<i class="fa '.$fila['icono'].' fa-2x"></i>',
                     'listIcon'=>$fila['icono'],
                     'es_menu'=>$fila['es_menu']=='S'?'SI':'NO'
                 );

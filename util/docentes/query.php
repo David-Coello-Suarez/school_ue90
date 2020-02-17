@@ -39,7 +39,8 @@
                         .' '.
                             html::estado($fila["estado"])
                         .'</div>',
-                    'usuario'=>$fila['usuario']
+                    'usuario'=>$fila['usuario'],
+                    'contrasena'=>$fila['pass']=='S'?'si':'no'
                 );
             }
             print_r(Funciones::json(1,"",$data));
