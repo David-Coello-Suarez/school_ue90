@@ -36,7 +36,7 @@
             $textarea="
                 <div class='form-group'>
                     <label for='".strtolower($prop[0])."'>".$prop[1]."</label>
-                    <textarea row='3' cols='10' class='form-control ".$prop[2]."' name='".strtolower($prop[0])."' id='".strtolower($prop[0])."' aria-describedby='help".ucfirst($prop[0])."' placeholder='".ucfirst($prop[3])."'></textarea>
+                    <textarea row='3' cols='10' class='form-control ".$prop[2]."' name='".strtolower($prop[0])."' id='".strtolower($prop[0])."' aria-describedby='help".ucfirst($prop[0])."' placeholder='".ucfirst($prop[3])."' ".$prop[5]."></textarea>
                     <small id='help".ucfirst($prop[0])."' class='text-muted'>".$prop[4]."</small>
                 </div>
             ";

@@ -1,4 +1,4 @@
-import{data,fotosImg,cedulaCoorecta,correoCorrecto}from"../module/funciones.js?v=1929";
+import{data,fotosImg,cedulaCoorecta,correoCorrecto}from"../module/funciones.js?v=1829";
 let cargarData=()=>{
     let respuesta = data(`util/${$("#pagina").val()}/query.php`);
     switch (respuesta.estado) {
@@ -35,10 +35,6 @@ let cargarData=()=>{
 $(document).ready(()=>{
     cargarData();
 
-    $('#iddni').focusout(function(){
-        cedulaCoorecta($(this));
-    });
-
     $("#IDListDocente").on('click','button.estado',function(){
         let datath=$("#IDListDocente").DataTable().row($(this).closest('tr')).data();
         let formData = new FormData();
@@ -73,26 +69,18 @@ $(document).ready(()=>{
         fotosImg(dispositos);
     });
 
-    let movil = IMask(
-        $("#idmovil")[0],{
-            mask:'+{593} 000-000-0000'
-        }
-    );
+    $("#idmovil").mask("099-999-9999");
+    $("#idfijo").mask("04-99-99-999");
+    $("#iddni").mask("0999999999");
 
-    $('#idcorreo').focusout(function(){
-        let mail = correoCorrecto($(this));
-    });
-
-    let fijo = IMask(
-        $("#idfijo")[0],{
-            mask:"{04}-00 00 000"
-        }
-    );
-
-    $("#modalFormDocente").submit(function(){
+    $("#modalFormDocente").submit(function(e){
+        let estadoForm = true, cedula="";
         let formData = new FormData();
-        formData.append("movil",movil.value);
-
+        
+        formData.append("existe",$("#iddni").is(":disabled")?1:0);
+        formData.append("cedula",cedulaCoorecta($("#iddni"))==true?$("#iddni").val():alert("No envio la cedula"));
+        let respuesta = data(`util/${$('#pagina').val()}/gestion-docentes.php`,formData);
+        console.log(respuesta);
         return false;
     });
 

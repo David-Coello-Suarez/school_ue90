@@ -13,8 +13,8 @@
                 case 'datatables':
                     html::js("lib/js/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"); echo "\r\n";
                     break;
-                case 'imask':
-                    html::js("https://cdnjs.cloudflare.com/ajax/libs/imask/6.0.1/imask.min.js"); echo "\r\n";
+                case 'mask':
+                    html::js("https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"); echo "\r\n";
                     break;
             }
         }
