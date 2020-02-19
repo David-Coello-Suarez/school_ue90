@@ -17,6 +17,7 @@
             fwrite($arch, date("Y-m-d H:i:s")." >>>> ".$desc."\r\n");
             fclose($arch);
         }
+
         public static function json($estado=3,$mensaje=NULL,$data=array())
         {
             $repuesta = new stdClass();
@@ -24,6 +25,17 @@
             $repuesta->mensaje=$mensaje;
             $repuesta->data=$data;
             return json_encode($repuesta);
+        }
+
+        public static function encrypt_descrypt($action="desencriptar",$string,$key_a,$key_b)
+        {
+            $method_encrypt="AES-128-CFB";
+            if($action=='encriptar'){
+                $salida_encriptada=base64_encode( openssl_encrypt($string, $method_encrypt, hash('sha256',str_replace(".","",strtolower($key_a."$"))),0,substr(hash('sha256',$key_b),0,16)));
+            }else{
+                $salida_encriptada=openssl_decrypt(base64_decode($string), $method_encrypt, hash('sha256',str_replace(".","",strtolower($key_a."$"))), 0, substr(hash('sha256',$key_b),0,16) );
+            }
+            return $salida_encriptada;
         }
     }
 ?>

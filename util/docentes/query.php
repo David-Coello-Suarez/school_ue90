@@ -9,6 +9,13 @@
             include_once("../core/html.php");
             $conexion=new DBConexion();
             $conexion->DBConexion();
+
+            $parametro=array();
+            $sql=$conexion->DBConsulta("SELECT * FROM `lista_parametro`");
+            foreach($sql as $fila){
+                $parametro[trim($fila['nombre'])]=trim($fila['valor']);
+            }
+
             $sql=$conexion->DBConsulta("SELECT * FROM school_ue9o.lista_docente");
             $btnEditar ='
                 <button type="button" class="btn btn-sm p-1 btn-outline-info editar mr-2">
@@ -18,7 +25,7 @@
             foreach ($sql as $fila) {
                 $data[]=array(
                     'id'=>intval($fila['id']),
-                    'dni'=>$fila['dni'],
+                    'dni'=>/*Funciones::encrypt_descrypt("desencriptar",$fila['dni'],$parametro['nameMini'],$parametro['nameEmpresa'])*/$fila['dni'] ,
                     'nombres'=>$fila['nombres'],
                     'apellidos'=>$fila['apellidos'],
                     'movil'=>$fila['movil'],

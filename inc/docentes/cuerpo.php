@@ -3,7 +3,6 @@
     <span>Agregar Nuevo Usuario</span>
 </button>
 <?
-    "@".strtolower(str_replace(".","",$parametro['nameMini'])).".com";
     $formulario ="
         <!-- <form  role='form'> -->
             <div class='row'>
@@ -65,14 +64,14 @@
                                 </div>
                                 <div class='col-sm'>
                                     ".
-                                        html::input(array('idCorreo','email','Correo Eléctronico','','usuario@ejemplo.com','form-control-sm','Correo electrónico del docente',"required"))
+                                        html::input(array('idCorreo','email','Correo Eléctronico','','usuario@ejemplo.com','form-control-sm','Correo electrónico del docente',"required pattern='[\w]+([.][\w]+)*@[\w]+([.][\w]+)*[.][a-zA-Z]{1,5}' "))
                                     ."
                                 </div>
                             </div>
                            <div class='row'>
                                 <div class='col-md'>
                                 ".
-                                    html::textarea(array("idDireccion","Dirección Domiciliaria","form-control-sm ","Dirección Domiciliaria del postulante","Dirección del docente","pattern='[a-zA-Z0-9_]' required" ))
+                                    html::textarea(array("idDireccion","Dirección Domiciliaria","form-control-sm ","Dirección Domiciliaria del postulante","Dirección del docente","pattern='[\w]' required" ))
                                 ."
                                 </div>
                            </div>  

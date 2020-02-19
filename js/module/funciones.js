@@ -153,14 +153,13 @@ export let cedulaCoorecta=(dni)=>{
 
 export let correoCorrecto=(email)=>{
     if(typeof(email[0].value)=="string"){
-        let expre_regular=/^\w+([\.-]?\w+)*@\w+([.-]?\w+)*(\.\w{3})+$/;
+        let expre_regular=/[\w]+([.][\w]+)*@[\w]+([.][\w]+)*[.][a-zA-Z]{3}/;
         if(expre_regular.test(email[0].value)){
+            document.getElementById(email[0].id).style.border="1px solid green";
             return true;
         }else{
             alert(`EL correo ingresado '${email[0].value}' es incorrecta`);
             return document.getElementById(email[0].id).style.border="1px solid red";
         }
-    }else{
-        return  document.getElementById(email[0].id).style.border="1px solid red";
     }
 }
