@@ -31,9 +31,9 @@
         {
             $method_encrypt="AES-128-CFB";
             if($action=='encriptar'){
-                $salida_encriptada=base64_encode( openssl_encrypt($string, $method_encrypt, hash('sha256',str_replace(".","",strtolower($key_a."$"))),0,substr(hash('sha256',$key_b),0,16)));
+                $salida_encriptada=base64_encode( openssl_encrypt($string, $method_encrypt, hash('sha256',strtolower(str_replace(".","",$key_a."$"))),0,substr(hash('sha256',$key_b),0,16)));
             }else{
-                $salida_encriptada=openssl_decrypt(base64_decode($string), $method_encrypt, hash('sha256',str_replace(".","",strtolower($key_a."$"))), 0, substr(hash('sha256',$key_b),0,16) );
+                $salida_encriptada=openssl_decrypt(base64_decode($string), $method_encrypt, hash('sha256',strtolower(str_replace(".","",$key_a."$"))), 0, substr(hash('sha256',$key_b),0,16) );
             }
             return $salida_encriptada;
         }

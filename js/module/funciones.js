@@ -95,7 +95,7 @@ export let fotosImg=(div)=>{
                     div.canvas_img.height=div.video.videoHeight;
                     context.drawImage(div.video,0,0,div.canvas_img.width,div.canvas_img.height);
                     let img_lienzo = new Image();
-                    img_lienzo.src=div.canvas_img.toDataURL('image/png');
+                    img_lienzo.src=div.canvas_img.toDataURL();
                     div.lienzo_img.setAttribute("src",img_lienzo.src);
                     div.lienzo_img.className="img-fluid imgUsuarios w-100 rounded";
                     div.video.play();

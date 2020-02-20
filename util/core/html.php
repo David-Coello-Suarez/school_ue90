@@ -83,7 +83,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                         </div>
-                        '.($buscar>0?"<form id='modal".ucfirst($id)."' role='form' enctype='multipart/form'  >":"").'
+                        '.($buscar>0?"<form id='modal".ucfirst($id)."' role='form' enctype='multipart/form-data'  >":"").'
                         <div class="modal-body p-2">
                             '.($detalles).'
                         </div>

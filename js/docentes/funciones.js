@@ -1,4 +1,4 @@
-import{data,fotosImg,cedulaCoorecta,correoCorrecto}from"../module/funciones.js?v=1849";
+import{data,fotosImg,cedulaCoorecta,correoCorrecto}from"../module/funciones.js?v=1859";
 let cargarData=()=>{
     let respuesta = data(`util/${$("#pagina").val()}/query.php`);
     switch (respuesta.estado) {
@@ -78,6 +78,7 @@ $(document).ready(()=>{
 
         if( cedulaCoorecta($("#iddni"))==true && correoCorrecto($("#idcorreo"))==true ){
             formData.append("existe",$("#iddni").is(":disabled")?1:0);
+            formData.append("imageUsario",encodeURIComponent($("#imagenUsuario")[0].src));
             formData.append("direccion",$("#iddireccion").val());
             formData.append("apellido",$("#idapellido").val());
             formData.append("nombre",$("#idnombre").val());
@@ -87,6 +88,7 @@ $(document).ready(()=>{
             formData.append("fijo",$("#idfijo").val());
             let respuesta = data(`util/${$('#pagina').val()}/gestion-docentes.php`,formData);
             console.log(respuesta);
+
         }        
 
         return false;

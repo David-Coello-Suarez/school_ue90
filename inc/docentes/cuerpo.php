@@ -22,7 +22,7 @@
                         <button type='button' class='buttones p-2 btn position-absolute'>
                             <i class='fa fa-camera text-black-50' aria-hidden='true'></i>
                         </button>
-                        <img src='img/system/user.jpg' alt='Foto del usuario' class='img-fluid imgUsuarios w-75 rounded'>
+                        <img src='img/system/user.jpg' alt='Foto del usuario' class='img-fluid imgUsuarios w-75 rounded' id='imagenUsuario'>
                     </div>
                 </div>
                 <div class='col-md-9'>

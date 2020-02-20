@@ -25,7 +25,7 @@
             foreach ($sql as $fila) {
                 $data[]=array(
                     'id'=>intval($fila['id']),
-                    'dni'=>/*Funciones::encrypt_descrypt("desencriptar",$fila['dni'],$parametro['nameMini'],$parametro['nameEmpresa'])*/$fila['dni'] ,
+                    'dni'=>Funciones::encrypt_descrypt("desencriptar",$fila['dni'],$parametro['nameMini'],$parametro['nameEmpresa']),
                     'nombres'=>$fila['nombres'],
                     'apellidos'=>$fila['apellidos'],
                     'movil'=>$fila['movil'],
