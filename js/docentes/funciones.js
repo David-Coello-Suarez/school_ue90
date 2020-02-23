@@ -7,11 +7,16 @@ let cargarData=()=>{
             $("#IDListDocente").DataTable({
                 destroy:true,
                 data:datas,
-                "order":[[2,"desc"],[1,"asc"]],
                 columns:[
                     {'data':'id',className:"text-center align-middle pl-1 pr-1","orderable":false,searcheble:"false"},
                     {'data':'estados',className:"text-center align-middle  pl-1",searcheble:"false"},
                     {'data':'dni',className:"text-center align-middle pl-1"},
+                    {
+                        'data':'imagen',
+                        "render":function(data,type,row){
+                            return '<img src="'+data+'" width="75" />';
+                        }
+                    },
                     {'data':'usuario',className:"text-center align-middle pl-1 pr-1","orderable":false,searcheble:"false"},
                     {'data':'contrasena',className:'text-center align-middle text-uppercase pl-1 pr-1','orderable':false,searcheble:'false'},
                     {'data':'apellidos',className:"text-center text-capitalize align-middle pl-2 pr-2","orderable":false},
@@ -23,8 +28,8 @@ let cargarData=()=>{
                     {'data':'registro',className:"text-center align-middle pl-1 pr-1","orderable":false,searcheble:"false"},
                 ],
                 'language':{
-                'url':'lib/js/DataTables/DataTables-1.10.18/spanish.json'
-                }
+                    'url':'lib/js/DataTables/DataTables-1.10.18/spanish.json'
+                },
             })
             break;
         default:
@@ -78,7 +83,7 @@ $(document).ready(()=>{
 
         if( cedulaCoorecta($("#iddni"))==true && correoCorrecto($("#idcorreo"))==true ){
             formData.append("existe",$("#iddni").is(":disabled")?1:0);
-            formData.append("imageUsario",encodeURIComponent($("#imagenUsuario")[0].src));
+            formData.append("imageUsario",$(".imgUsuarios")[0].src );
             formData.append("direccion",$("#iddireccion").val());
             formData.append("apellido",$("#idapellido").val());
             formData.append("nombre",$("#idnombre").val());
@@ -87,7 +92,7 @@ $(document).ready(()=>{
             formData.append("cedula",$("#iddni").val());
             formData.append("fijo",$("#idfijo").val());
             let respuesta = data(`util/${$('#pagina').val()}/gestion-docentes.php`,formData);
-            console.log(respuesta);
+            console.log( respuesta );
 
         }        
 

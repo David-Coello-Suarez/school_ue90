@@ -73,29 +73,22 @@
             }
             else
             {
-                // $dni_cifrada = Funciones::encrypt_descrypt("encriptar",$cedula,$parametro['nameMini'],$parametro['nameEmpresa']);
+                $dni_cifrada = Funciones::encrypt_descrypt("encriptar",$cedula,$parametro['nameMini'],$parametro['nameEmpresa']);
 
                 // $usuario = substr(explode(" ",$nombres)[0],0,1).substr(explode(" ",$nombres)[1],0,1).explode(" ",$apellidos)[0]."@".strtolower(str_replace(".","",$parametro['nameMini'])).".com";
 
                 // $sql=$conexion->DBConsulta("
-                //     CALL school_ue9o.docenteUsuario($existe,'".strtolower(str_replace(".","",$parametro['nameMini']."$"))."','".Funciones::encrypt_descrypt("encriptar",$cedula,$parametro['nameMini'],$parametro['nameEmpresa'])."','$nombres','$apellidos','".strtoupper($estado)."','$movil','$fijo','$direccion','$mail','$usuario','Desarrollador')
+                //     CALL school_ue9o.docenteUsuario($existe,'".strtolower(str_replace(".","",$parametro['nameMini']."$"))."','".Funciones::encrypt_descrypt("encriptar",$cedula,$parametro['nameMini'],$parametro['nameEmpresa'])."','$nombres','$apellidos','".strtoupper($estado)."','$movil','$fijo','$direccion','$mail','$usuario','".urldecode($imagenUSuario)."','Desarrollador')
                 // ");
 
                 // $sql=explode(",",$sql[0][0]);
+                $imgLimp= explode(",",urldecode($imagenUSuario));
 
-                // if( ucfirst($sql[2]) =="I" ){
-
-                // }
-
-                // print_r(Funciones::json($sql[0],$sql[1]));
-
-                $nueva_image = explode(",",urldecode($imagenUSuario));
-                $data = base64_decode($nueva_image[1]);
-                $ruta = "../nueva.jpg";
-                file_put_contents($ruta, $data);
-
-                print_r(Funciones::json(2,$data));
-
+                $archivo = fopen($_SERVER['DOCUMENT_ROOT'].'/UE90-2/img/docentes/'.$dni_cifrada.'.png',"a");
+                $imgBit = fread($archivo,strlen($imgLimp[1]));
+                fclose($archivo);
+                print_r(Funciones::json(2,$imgLimp));
+                #no rendirce asta grabar las imagenes de los usuarios en el sistema
             }
         }else{
             print_r(Funciones::json(2,"Debe Iniciar Session."));

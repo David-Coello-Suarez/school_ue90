@@ -25,6 +25,7 @@
             foreach ($sql as $fila) {
                 $data[]=array(
                     'id'=>intval($fila['id']),
+                    'foto'=> $fila['imagen'],
                     'dni'=>Funciones::encrypt_descrypt("desencriptar",$fila['dni'],$parametro['nameMini'],$parametro['nameEmpresa']),
                     'nombres'=>$fila['nombres'],
                     'apellidos'=>$fila['apellidos'],
