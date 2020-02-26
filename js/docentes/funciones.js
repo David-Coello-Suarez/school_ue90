@@ -1,4 +1,4 @@
-import{data,fotosImg,cedulaCoorecta,correoCorrecto}from"../module/funciones.js?v=1859";
+import{data,fotoImg,fotosImg,cedulaCoorecta,correoCorrecto}from"../module/funciones.js?v=1909";
 let cargarData=()=>{
     let respuesta = data(`util/${$("#pagina").val()}/query.php`);
     switch (respuesta.estado) {
@@ -39,6 +39,26 @@ let cargarData=()=>{
 }
 $(document).ready(()=>{
     cargarData();
+    let canvas = document.getElementById('canvasImg');
+    if(canvas && canvas.getContext){
+        let context = canvas.getContext("2d");
+        if(context){
+            let img = new Image();
+            img.src = "img/system/user.jpg";
+            img.onload=function(){
+                context.drawImage(this,0,0,(1024/3.5),(1024/7));
+            }
+        }
+    }
+
+    $('#tomarFoto').on('click',function(){
+        let esquema = {
+            video:$("#videoCamera")[0],
+            canvas:$("#canvasImg")[0],
+            capturar:$("#capturarImg")[0]
+        };
+        fotoImg(esquema);
+    });
 
     $("#IDListDocente").on('click','button.estado',function(){
         let datath=$("#IDListDocente").DataTable().row($(this).closest('tr')).data();
@@ -59,44 +79,44 @@ $(document).ready(()=>{
         }
     });
 
-    $(".buttones").on('click',()=>{
-        $(".imgUsuario").addClass("d-none");
-        $(".tomarFoto").removeClass("d-none");
-        let dispositos={
-            video:$("#videoCamera")[0],
-            option_value:$("#selectDevice")[0],
-            button_cap_img:$("#capturarImg")[0],
-            canvas_img:$("#canvasImg")[0],
-            lienzo_img:$(".imgUsuarios")[0],
-            foto_usuario:$(".imgUsuario")[0],
-            foto_sistema:$(".tomarFoto")[0]
-        };
-        fotosImg(dispositos);
-    });
+    // $(".buttones").on('click',()=>{
+    //     $(".imgUsuario").addClass("d-none");
+    //     $(".tomarFoto").removeClass("d-none");
+    //     let dispositos={
+    //         video:$("#videoCamera")[0],
+    //         option_value:$("#selectDevice")[0],
+    //         button_cap_img:$("#capturarImg")[0],
+    //         canvas_img:$("#canvasImg")[0],
+    //         lienzo_img:$(".imgUsuarios")[0],
+    //         foto_usuario:$(".imgUsuario")[0],
+    //         foto_sistema:$(".tomarFoto")[0]
+    //     };
+    //     fotosImg(dispositos);
+    // });
 
     $("#idmovil").mask("099-999-9999");
     $("#idfijo").mask("04-99-99-999");
     $("#iddni").mask("0999999999");
 
-    $("#modalFormDocente").submit(function(e){
-        let formData = new FormData();
+    // $("#modalFormDocente").submit(function(e){
+    //     let formData = new FormData();
 
-        if( cedulaCoorecta($("#iddni"))==true && correoCorrecto($("#idcorreo"))==true ){
-            formData.append("existe",$("#iddni").is(":disabled")?1:0);
-            formData.append("imageUsario",$(".imgUsuarios")[0].src );
-            formData.append("direccion",$("#iddireccion").val());
-            formData.append("apellido",$("#idapellido").val());
-            formData.append("nombre",$("#idnombre").val());
-            formData.append("movil",$("#idmovil").val());
-            formData.append("mail",$("#idcorreo").val());
-            formData.append("cedula",$("#iddni").val());
-            formData.append("fijo",$("#idfijo").val());
-            let respuesta = data(`util/${$('#pagina').val()}/gestion-docentes.php`,formData);
-            console.log( respuesta );
+    //     if( cedulaCoorecta($("#iddni"))==true && correoCorrecto($("#idcorreo"))==true ){
+    //         formData.append("existe",$("#iddni").is(":disabled")?1:0);
+    //         formData.append("imageUsario",encodeURIComponent($(".imgUsuarios")[0].src ));
+    //         formData.append("direccion",$("#iddireccion").val());
+    //         formData.append("apellido",$("#idapellido").val());
+    //         formData.append("nombre",$("#idnombre").val());
+    //         formData.append("movil",$("#idmovil").val());
+    //         formData.append("mail",$("#idcorreo").val());
+    //         formData.append("cedula",$("#iddni").val());
+    //         formData.append("fijo",$("#idfijo").val());
+    //         let respuesta = data(`util/${$('#pagina').val()}/gestion-docentes.php`,formData);
+    //         console.log( respuesta );
 
-        }        
+    //     }        
 
-        return false;
-    });
+    //     return false;
+    // });
 
 });

@@ -82,12 +82,11 @@
                 // ");
 
                 // $sql=explode(",",$sql[0][0]);
-                $imgLimp= explode(",",urldecode($imagenUSuario));
+                $imagenLimpia = str_replace("data:image/jpeg;base64,", "", urldecode($imagenUSuario));
+                $imageDecodifica=base64_decode($imagenLimpia);
+                file_put_contents($_SERVER['DOCUMENT_ROOT']."/UE90-2/img/docentes/".uniqid().'.jpeg',$imageDecodifica);
+                print_r(Funciones::json(2,urldecode($imagenUSuario)));
 
-                $archivo = fopen($_SERVER['DOCUMENT_ROOT'].'/UE90-2/img/docentes/'.$dni_cifrada.'.png',"a");
-                $imgBit = fread($archivo,strlen($imgLimp[1]));
-                fclose($archivo);
-                print_r(Funciones::json(2,$imgLimp));
                 #no rendirce asta grabar las imagenes de los usuarios en el sistema
             }
         }else{

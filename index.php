@@ -1,4 +1,4 @@
-<?
+<?php
     include_once("util/system/DBconexion.php");
     include_once("util/system/funciones.php");
     include_once("util/system/session.php");

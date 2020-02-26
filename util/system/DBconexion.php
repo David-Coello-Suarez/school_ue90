@@ -24,7 +24,7 @@
                 return $this->conexion = $pdo;
             }catch( PDOException $e ){
                 Funciones::logs(2,"DBConexion.txt","Error de conexion => ".$e->getMessage());
-                die("Error de conexión. ".$e->getMessage());
+                die("Error de conexión. ".$e);
             }
         }
 

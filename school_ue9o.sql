@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-02-2020 a las 20:29:50
+-- Tiempo de generación: 25-02-2020 a las 22:17:06
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.1.33
 
@@ -26,6 +26,31 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `docenteUsuario` (IN `existe` INT UNSIGNED ZEROFILL, IN `paraEncrypt` VARCHAR(50) CHARSET utf8, IN `paraDni` VARCHAR(50) CHARSET utf8, IN `paraNombre` VARCHAR(50) CHARSET utf8, IN `paraApellido` VARCHAR(50) CHARSET utf8, IN `paraEstado` CHAR(2) CHARSET utf8, IN `paraMovil` CHAR(10) CHARSET utf8, IN `paraFijo` CHAR(10) CHARSET utf8, IN `paraDireccion` TEXT CHARSET utf8, IN `paraMail` VARCHAR(50) CHARSET utf8, IN `paraUsuario` VARCHAR(50) CHARSET utf8, IN `imagen` TEXT, IN `paraUsuarioAccion` VARCHAR(50) CHARSET utf8)  BEGIN
+		declare ultimo int default 0;
+        IF existe > 0 THEN
+        	UPDATE sys_docente SET
+            estado=paraEstado,
+            nombres=paraNombre,
+            apellidos=paraApellido,
+            tlf_movil=paraMovil,
+            tlf_fijo=paraFijo,
+            direccion=paraDireccion,
+            mail=paraMail,
+            usuario_update=paraUsuarioAccion,
+            fecha_update=now()
+            where dni = aes_encrypt(`paraDni`,'ue9o');
+        ELSE
+        	INSERT INTO `sys_docente`(`estado`, `dni`, `nombres`, `apellidos`, `tlf_movil`, `tlf_fijo`, `direccion`, `mail`,`imagenUsuario`, `usuario_registro`, `fecha_registro`) 
+            VALUES (paraEstado,aes_encrypt(`paraDni`,`paraEncrypt`),paraNombre,paraApellido,paraMovil,paraFijo,paraDireccion,paraMail,imagen,paraUsuarioAccion,now());
+            select LAST_INSERT_ID() into ultimo;
+            INSERT INTO `sys_usuario`(`id_docente`, `usuario`, `contrasena`, `camb_pass`, `usuario_registro`, `fecha_registro`) 
+            VALUES (ultimo,paraUsuario,aes_encrypt(`paraDni`,`paraEncrypt`),'N',paraUsuarioAccion,now());
+            
+            select "1,Usuario Registrado";
+        END if;
+    END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `flag` (IN `usuario` VARCHAR(50))  BEGIN
 	IF usuario = "Desarrollador" OR usuario = "Administrador" THEN
         SELECT m.ventana
@@ -40,6 +65,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `flag` (IN `usuario` VARCHAR(50))  B
         WHERE a.usuario=usuario
         AND m.estado='A'
         AND m.es_menu='N'
+        and m.ventana  IS NOT NULL
         ORDER BY m.idpadre, m.orden
         LIMIT 1;
     END IF;
@@ -96,7 +122,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `submenu` (IN `padre_menu` INT, IN `
     END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateDocenteUsuario` (IN `paraIDDocente` INT, IN `paraEstado` CHAR(2), OUT `respuesta` VARCHAR(50))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateDocente` (IN `paraIDDocente` INT, IN `paraEstado` CHAR(2), OUT `respuesta` VARCHAR(50))  BEGIN
 	UPDATE sys_docente SET 
     estado=`paraEstado`,
     usuario_update="Desarrollador",
@@ -223,7 +249,8 @@ CREATE TABLE `lista_ciclo_academico` (
 --
 CREATE TABLE `lista_docente` (
 `id` int(10) unsigned zerofill
-,`dni` char(10)
+,`dni` varbinary(255)
+,`imagen` tinyblob
 ,`usuario` varchar(75)
 ,`pass` char(2)
 ,`estado` char(2)
@@ -344,26 +371,19 @@ INSERT INTO `sys_ciclo_lectivo` (`idCicloAcad`, `nombre_lectivo`, `anio_lectivo`
 CREATE TABLE `sys_docente` (
   `idDocente` int(10) UNSIGNED ZEROFILL NOT NULL,
   `estado` char(2) NOT NULL,
-  `d_n_i` char(10) NOT NULL,
+  `dni` tinyblob NOT NULL,
   `nombres` varchar(100) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
   `tlf_movil` char(10) NOT NULL,
   `tlf_fijo` char(10) NOT NULL,
   `direccion` text NOT NULL,
   `mail` varchar(50) NOT NULL,
+  `imagenUsuario` tinyblob NOT NULL,
   `usuario_update` varchar(50) DEFAULT NULL,
   `fecha_update` datetime DEFAULT NULL,
   `usuario_registro` varchar(50) NOT NULL,
   `fecha_registro` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `sys_docente`
---
-
-INSERT INTO `sys_docente` (`idDocente`, `estado`, `d_n_i`, `nombres`, `apellidos`, `tlf_movil`, `tlf_fijo`, `direccion`, `mail`, `usuario_update`, `fecha_update`, `usuario_registro`, `fecha_registro`) VALUES
-(0000000001, 'I', '0987654321', 'david fernando', 'Coello Suaréz', '0960776685', '', 'Coop.: Casas del tigre MZ:2208 Sl:20', 'david@mail.com', 'Desarrollador', '2020-02-16 12:06:53', 'Desarrollador', '2020-02-13 12:08:26'),
-(0000000002, 'I', '0912345678', 'maria esther', 'inguillay valento', '0912873465', '', 'Coop. Nueva prosperian', 'mariachikita@mail.com', 'Desarrollador', '2020-02-15 16:48:45', 'Desarrollador', '2020-02-13 13:47:31');
 
 -- --------------------------------------------------------
 
@@ -399,7 +419,7 @@ INSERT INTO `sys_menu` (`idmenu`, `nombre`, `libreria`, `orden`, `estado`, `idpa
 (0000000007, 'Ciclo Escolar', 'datatables', 0000000001, 'A', 00000000009, 'ciscloescol', 'N', 'fa fa-flag', 'Desarrollador', '2020-02-10 11:09:08', 'Desarrollador', '2020-02-13 11:34:02'),
 (0000000008, 'Paralelos', 'datatables', 0000000004, 'A', 00000000009, 'paralelos', 'N', 'fa-certificate', 'Desarrollador', '2020-02-11 15:55:17', 'Desarrollador', '2020-02-13 12:13:01'),
 (0000000009, 'Gestión Escolar', '', 0000000006, 'A', 00000000000, '', 'S', 'fa-university', 'Desarrollador', '2020-02-12 14:03:10', 'Desarrollador', '2020-02-13 11:32:17'),
-(0000000010, 'Docentes', 'datatables,imask', 0000000002, 'A', 00000000009, 'docentes', 'N', 'fa-users', 'Desarrollador', '2020-02-13 12:11:20', 'Desarrollador', '2020-02-13 12:13:17');
+(0000000010, 'Docentes', 'datatables,mask', 0000000002, 'A', 00000000009, 'docentes', 'N', 'fa-users', 'Desarrollador', '2020-02-13 12:11:20', 'Desarrollador', '2020-02-13 12:13:17');
 
 -- --------------------------------------------------------
 
@@ -472,7 +492,7 @@ CREATE TABLE `sys_parametro` (
 
 INSERT INTO `sys_parametro` (`id_parametro`, `nombre`, `descripcion`, `valor`, `usuario_update`, `fecha_update`, `usuario_registro`, `fecha_registro`) VALUES
 (0000000001, 'nameMini', 'Nombre de la institución a la que opera el sistema. Tomando las iniciales de la institución.', 'U.E.9.O.', NULL, NULL, 'Desarrollador', '2020-01-29 10:15:57'),
-(0000000002, 'webversion', 'Sistema de versionamiento para los css y javascript.', '97', NULL, NULL, 'Desarrollador', '2020-01-24 10:17:39'),
+(0000000002, 'webversion', 'Sistema de versionamiento para los css y javascript.', '114', NULL, NULL, 'Desarrollador', '2020-01-24 10:17:39'),
 (0000000003, 'nameEmpresa', 'Nombre de la empresa la cual opera el sistema, con nombres largos.', 'Unidad Educativa 9 de Octubre', NULL, NULL, 'Desarrollador', '2020-01-29 10:17:50'),
 (0000000004, 'paginaDefault', 'Página de inicio por default del sistema.', 'inicio', NULL, NULL, 'Desarrollador', '2020-01-29 10:35:07'),
 (0000000005, 'numMaxMenu', 'Número máxino de mmenús y submenus', '10', NULL, NULL, 'Desarrollador', '2020-02-04 13:20:59');
@@ -485,23 +505,15 @@ INSERT INTO `sys_parametro` (`id_parametro`, `nombre`, `descripcion`, `valor`, `
 
 CREATE TABLE `sys_usuario` (
   `idUsario` int(10) UNSIGNED ZEROFILL NOT NULL,
-  `id_docente` char(10) NOT NULL,
+  `id_docente` int(10) UNSIGNED ZEROFILL NOT NULL,
   `usuario` varchar(75) NOT NULL,
-  `contrasena` varchar(100) NOT NULL,
+  `contrasena` blob NOT NULL,
   `camb_pass` char(2) NOT NULL,
   `usua_update` varchar(45) DEFAULT NULL,
   `fecha_update` datetime DEFAULT NULL,
   `usuario_registro` varchar(45) NOT NULL,
   `fecha_registro` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `sys_usuario`
---
-
-INSERT INTO `sys_usuario` (`idUsario`, `id_docente`, `usuario`, `contrasena`, `camb_pass`, `usua_update`, `fecha_update`, `usuario_registro`, `fecha_registro`) VALUES
-(0000000001, '0987654321', 'dfcoello@ue90.com', '12345', 'S', '', NULL, 'Desarrollador', '2020-02-13 13:20:00'),
-(0000000002, '0912345678', 'meinguillay@ue9o.com', '123456789', 'N', NULL, NULL, 'Desarrollador', '2020-02-13 13:48:29');
 
 -- --------------------------------------------------------
 
@@ -519,7 +531,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `lista_docente`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `lista_docente`  AS  select `dc`.`idDocente` AS `id`,`dc`.`d_n_i` AS `dni`,`us`.`usuario` AS `usuario`,`us`.`camb_pass` AS `pass`,`dc`.`estado` AS `estado`,`dc`.`nombres` AS `nombres`,`dc`.`apellidos` AS `apellidos`,`dc`.`tlf_movil` AS `movil`,`dc`.`tlf_fijo` AS `fijo`,`dc`.`direccion` AS `direccion`,`dc`.`mail` AS `mail`,date_format(`dc`.`fecha_registro`,'%d-%m%-%Y') AS `registro` from (`sys_docente` `dc` left join `sys_usuario` `us` on(`dc`.`d_n_i` = `us`.`id_docente`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `lista_docente`  AS  select `dc`.`idDocente` AS `id`,aes_decrypt(`dc`.`dni`,'ue9o$') AS `dni`,`dc`.`imagenUsuario` AS `imagen`,`us`.`usuario` AS `usuario`,`us`.`camb_pass` AS `pass`,`dc`.`estado` AS `estado`,`dc`.`nombres` AS `nombres`,`dc`.`apellidos` AS `apellidos`,`dc`.`tlf_movil` AS `movil`,`dc`.`tlf_fijo` AS `fijo`,`dc`.`direccion` AS `direccion`,`dc`.`mail` AS `mail`,date_format(`dc`.`fecha_registro`,'%d-%m%-%Y') AS `registro` from (`sys_docente` `dc` left join `sys_usuario` `us` on(`dc`.`idDocente` = `us`.`id_docente`)) ;
 
 -- --------------------------------------------------------
 
@@ -569,7 +581,7 @@ ALTER TABLE `sys_ciclo_lectivo`
 --
 ALTER TABLE `sys_docente`
   ADD PRIMARY KEY (`idDocente`),
-  ADD UNIQUE KEY `d-n-i` (`d_n_i`);
+  ADD UNIQUE KEY `d-n-i` (`dni`) USING HASH;
 
 --
 -- Indices de la tabla `sys_menu`
@@ -594,7 +606,7 @@ ALTER TABLE `sys_parametro`
 --
 ALTER TABLE `sys_usuario`
   ADD PRIMARY KEY (`idUsario`),
-  ADD KEY `fk_usuario_to_docente_idx` (`id_docente`);
+  ADD KEY `id_docente` (`id_docente`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -616,7 +628,7 @@ ALTER TABLE `sys_ciclo_lectivo`
 -- AUTO_INCREMENT de la tabla `sys_docente`
 --
 ALTER TABLE `sys_docente`
-  MODIFY `idDocente` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idDocente` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `sys_menu`
@@ -640,7 +652,7 @@ ALTER TABLE `sys_parametro`
 -- AUTO_INCREMENT de la tabla `sys_usuario`
 --
 ALTER TABLE `sys_usuario`
-  MODIFY `idUsario` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idUsario` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -650,7 +662,7 @@ ALTER TABLE `sys_usuario`
 -- Filtros para la tabla `sys_usuario`
 --
 ALTER TABLE `sys_usuario`
-  ADD CONSTRAINT `fk_usuario_to_docente` FOREIGN KEY (`id_docente`) REFERENCES `sys_docente` (`d_n_i`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_usuario_to_docente` FOREIGN KEY (`id_docente`) REFERENCES `sys_docente` (`idDocente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

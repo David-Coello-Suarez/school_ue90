@@ -95,7 +95,7 @@ export let fotosImg=(div)=>{
                     div.canvas_img.height=div.video.videoHeight;
                     context.drawImage(div.video,0,0,div.canvas_img.width,div.canvas_img.height);
                     let img_lienzo = new Image();
-                    img_lienzo.src=div.canvas_img.toDataURL();
+                    img_lienzo.src=div.canvas_img.toDataURL('image/jpeg',1.0);
                     div.lienzo_img.setAttribute("src",img_lienzo.src);
                     div.lienzo_img.className="img-fluid imgUsuarios w-100 rounded";
                     div.video.play();
@@ -114,6 +114,27 @@ export let fotosImg=(div)=>{
     function getUserMedia(){
         return (navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia).apply(navigator,arguments);
     }
+}
+
+export let fotoImg=e=>{
+    const controlador = {video:{width:e.video.width,height:e.video.height}};
+    navigator.mediaDevices.getUserMedia(controlador).then(stream=>{
+        window.stream = stream;
+        e.video.srcObject = stream;
+        e.video.play();
+        let context = e.canvas.getContext('2d');
+        e.capturar.addEventListener('click',()=>{
+            context.drawImage(e.video,0,0,e.video.width,e.video.height);
+            // stream.getTracks().forEach((track)=>{
+            //     track.stop();
+            // });
+            let img = new Image();
+            img.src = e.canvas.toDataURL("image/jpeg");
+            console.log(img);
+        });
+    });
+    console.log(e.canvas);
+
 }
 
 export let cedulaCoorecta=(dni)=>{

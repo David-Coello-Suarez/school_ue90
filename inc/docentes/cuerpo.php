@@ -6,7 +6,7 @@
     $formulario ="
         <!-- <form  role='form'> -->
             <div class='row'>
-                <div class='align-self-center col-md-3 img-usuario text-center'>
+                <!-- <div class='align-self-center col-md-3 img-usuario text-center'>
                     <div class='tomarFoto d-none'>
                         <video id='videoCamera' class='w-100 rounded'></video>
                         <canvas id='canvasImg' class='w-100 rounded d-none'></canvas>
@@ -23,6 +23,21 @@
                             <i class='fa fa-camera text-black-50' aria-hidden='true'></i>
                         </button>
                         <img src='img/system/user.jpg' alt='Foto del usuario' class='img-fluid imgUsuarios w-75 rounded'>
+                    </div>
+                </div> -->
+                <div class='col-md-3 text-center'>
+                    <img src='img/system/user.jpg' class='rounded-0 w-75 mb-1' />
+                    <button type='button' class='btn btn-outline-info btn-sm' id='tomarFoto' >
+                        <i class='fa fa-camera fa-1x mr-1' aria-hidden='true'></i>
+                        <span>Tomar foto</span>
+                    </button>
+                    <div class='mt-1'>
+                        <video id='videoCamera' autoplay class='w-100'></video>
+                        <canvas id='canvasImg' class='w-100 rounded h-50'></canvas>
+                        <button type='button' class='btn btn-outline-primary btn-sm w-100' id='capturarImg' >
+                            <i class='fa fa-camera fa-1x mr-1' aria-hidden='true'></i>
+                            <span>Capturar</span>
+                        </button>
                     </div>
                 </div>
                 <div class='col-md-9'>
